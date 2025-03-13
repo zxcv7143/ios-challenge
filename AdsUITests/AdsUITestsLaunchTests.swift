@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class AdListUITestsLaunchTests: XCTestCase {
+final class AdsUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

@@ -24,38 +24,43 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		380022942D831669007918D1 /* AdList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdList.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		380022AD2D83166D007918D1 /* AdListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		380022B72D83166D007918D1 /* AdListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		380022942D831669007918D1 /* Ads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ads.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		380022AD2D83166D007918D1 /* AdsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		380022B72D83166D007918D1 /* AdsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		380022BF2D83166D007918D1 /* Exceptions for "AdList" folder in "AdList" target */ = {
+		380027672D834944007918D1 /* Exceptions for "Ads" folder in "Ads" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
-			target = 380022932D831669007918D1 /* AdList */;
+			target = 380022932D831669007918D1 /* Ads */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		380022962D831669007918D1 /* AdList */ = {
+		380022962D831669007918D1 /* Ads */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				380022BF2D83166D007918D1 /* Exceptions for "AdList" folder in "AdList" target */,
+				380027672D834944007918D1 /* Exceptions for "Ads" folder in "Ads" target */,
 			);
-			path = AdList;
+			path = Ads;
 			sourceTree = "<group>";
 		};
-		380022B02D83166D007918D1 /* AdListTests */ = {
+		380022B02D83166D007918D1 /* AdsTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AdListTests;
+			path = AdsTests;
 			sourceTree = "<group>";
 		};
-		380022BA2D83166D007918D1 /* AdListUITests */ = {
+		380022BA2D83166D007918D1 /* AdsUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AdListUITests;
+			path = AdsUITests;
+			sourceTree = "<group>";
+		};
+		380027652D8348C1007918D1 /* App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -88,9 +93,10 @@
 		3800228B2D831669007918D1 = {
 			isa = PBXGroup;
 			children = (
-				380022962D831669007918D1 /* AdList */,
-				380022B02D83166D007918D1 /* AdListTests */,
-				380022BA2D83166D007918D1 /* AdListUITests */,
+				380027652D8348C1007918D1 /* App */,
+				380022962D831669007918D1 /* Ads */,
+				380022B02D83166D007918D1 /* AdsTests */,
+				380022BA2D83166D007918D1 /* AdsUITests */,
 				380022952D831669007918D1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,9 +104,9 @@
 		380022952D831669007918D1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				380022942D831669007918D1 /* AdList.app */,
-				380022AD2D83166D007918D1 /* AdListTests.xctest */,
-				380022B72D83166D007918D1 /* AdListUITests.xctest */,
+				380022942D831669007918D1 /* Ads.app */,
+				380022AD2D83166D007918D1 /* AdsTests.xctest */,
+				380022B72D83166D007918D1 /* AdsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,9 +114,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		380022932D831669007918D1 /* AdList */ = {
+		380022932D831669007918D1 /* Ads */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 380022C02D83166D007918D1 /* Build configuration list for PBXNativeTarget "AdList" */;
+			buildConfigurationList = 380022C02D83166D007918D1 /* Build configuration list for PBXNativeTarget "Ads" */;
 			buildPhases = (
 				380022902D831669007918D1 /* Sources */,
 				380022912D831669007918D1 /* Frameworks */,
@@ -121,18 +127,19 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				380022962D831669007918D1 /* AdList */,
+				380022962D831669007918D1 /* Ads */,
+				380027652D8348C1007918D1 /* App */,
 			);
-			name = AdList;
+			name = Ads;
 			packageProductDependencies = (
 			);
 			productName = AdList;
-			productReference = 380022942D831669007918D1 /* AdList.app */;
+			productReference = 380022942D831669007918D1 /* Ads.app */;
 			productType = "com.apple.product-type.application";
 		};
-		380022AC2D83166D007918D1 /* AdListTests */ = {
+		380022AC2D83166D007918D1 /* AdsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 380022C52D83166D007918D1 /* Build configuration list for PBXNativeTarget "AdListTests" */;
+			buildConfigurationList = 380022C52D83166D007918D1 /* Build configuration list for PBXNativeTarget "AdsTests" */;
 			buildPhases = (
 				380022A92D83166D007918D1 /* Sources */,
 				380022AA2D83166D007918D1 /* Frameworks */,
@@ -144,18 +151,18 @@
 				380022AF2D83166D007918D1 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				380022B02D83166D007918D1 /* AdListTests */,
+				380022B02D83166D007918D1 /* AdsTests */,
 			);
-			name = AdListTests;
+			name = AdsTests;
 			packageProductDependencies = (
 			);
 			productName = AdListTests;
-			productReference = 380022AD2D83166D007918D1 /* AdListTests.xctest */;
+			productReference = 380022AD2D83166D007918D1 /* AdsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		380022B62D83166D007918D1 /* AdListUITests */ = {
+		380022B62D83166D007918D1 /* AdsUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 380022C82D83166D007918D1 /* Build configuration list for PBXNativeTarget "AdListUITests" */;
+			buildConfigurationList = 380022C82D83166D007918D1 /* Build configuration list for PBXNativeTarget "AdsUITests" */;
 			buildPhases = (
 				380022B32D83166D007918D1 /* Sources */,
 				380022B42D83166D007918D1 /* Frameworks */,
@@ -167,13 +174,13 @@
 				380022B92D83166D007918D1 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				380022BA2D83166D007918D1 /* AdListUITests */,
+				380022BA2D83166D007918D1 /* AdsUITests */,
 			);
-			name = AdListUITests;
+			name = AdsUITests;
 			packageProductDependencies = (
 			);
 			productName = AdListUITests;
-			productReference = 380022B72D83166D007918D1 /* AdListUITests.xctest */;
+			productReference = 380022B72D83166D007918D1 /* AdsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -199,7 +206,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3800228F2D831669007918D1 /* Build configuration list for PBXProject "AdList" */;
+			buildConfigurationList = 3800228F2D831669007918D1 /* Build configuration list for PBXProject "Ads" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -213,9 +220,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				380022932D831669007918D1 /* AdList */,
-				380022AC2D83166D007918D1 /* AdListTests */,
-				380022B62D83166D007918D1 /* AdListUITests */,
+				380022932D831669007918D1 /* Ads */,
+				380022AC2D83166D007918D1 /* AdsTests */,
+				380022B62D83166D007918D1 /* AdsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -271,12 +278,12 @@
 /* Begin PBXTargetDependency section */
 		380022AF2D83166D007918D1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 380022932D831669007918D1 /* AdList */;
+			target = 380022932D831669007918D1 /* Ads */;
 			targetProxy = 380022AE2D83166D007918D1 /* PBXContainerItemProxy */;
 		};
 		380022B92D83166D007918D1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 380022932D831669007918D1 /* AdList */;
+			target = 380022932D831669007918D1 /* Ads */;
 			targetProxy = 380022B82D83166D007918D1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -290,7 +297,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AdList/Info.plist;
+				INFOPLIST_FILE = Ads/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -318,7 +325,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AdList/Info.plist;
+				INFOPLIST_FILE = Ads/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -390,6 +397,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Ads/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -447,6 +455,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Ads/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -471,7 +480,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AdList";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ads.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ads";
 			};
 			name = Debug;
 		};
@@ -489,7 +498,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AdList";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ads.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ads";
 			};
 			name = Release;
 		};
@@ -528,7 +537,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3800228F2D831669007918D1 /* Build configuration list for PBXProject "AdList" */ = {
+		3800228F2D831669007918D1 /* Build configuration list for PBXProject "Ads" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				380022C32D83166D007918D1 /* Debug */,
@@ -537,7 +546,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		380022C02D83166D007918D1 /* Build configuration list for PBXNativeTarget "AdList" */ = {
+		380022C02D83166D007918D1 /* Build configuration list for PBXNativeTarget "Ads" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				380022C12D83166D007918D1 /* Debug */,
@@ -546,7 +555,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		380022C52D83166D007918D1 /* Build configuration list for PBXNativeTarget "AdListTests" */ = {
+		380022C52D83166D007918D1 /* Build configuration list for PBXNativeTarget "AdsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				380022C62D83166D007918D1 /* Debug */,
@@ -555,7 +564,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		380022C82D83166D007918D1 /* Build configuration list for PBXNativeTarget "AdListUITests" */ = {
+		380022C82D83166D007918D1 /* Build configuration list for PBXNativeTarget "AdsUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				380022C92D83166D007918D1 /* Debug */,
