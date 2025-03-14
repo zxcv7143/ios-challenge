@@ -64,7 +64,7 @@ class AdListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: AdListTableViewCell.name, for: indexPath)
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: AdListTableViewCell.cellId, for: indexPath)
         guard let adCell = cell as? AdListTableViewCell else { return UITableViewCell() }
         //adCell.delegate = self
         adCell.load(homeAd: self.ads[indexPath.row])
