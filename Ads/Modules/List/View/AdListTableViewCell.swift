@@ -15,13 +15,11 @@ final class AdListTableViewCell: UITableViewCell {
     @IBOutlet private weak var propertyTypeLabel: UILabel!
     @IBOutlet private weak var locationLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
-    @IBOutlet private weak var separatorView: UIView!
     @IBOutlet private weak var extraInfoLabel: UILabel!
     @IBOutlet private weak var mapLocationImageView: UIImageView!
     @IBOutlet private weak var infoView: UIView!
-    @IBOutlet private weak var topConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var favoriteAdImageView: UIImageView!
+    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: Vars
     static let cellId: String = "AdListTableViewCellId"
@@ -33,6 +31,7 @@ final class AdListTableViewCell: UITableViewCell {
     func load(homeAd: Ad) {
         self.currentAd = homeAd
         self.setupLabelsContent()
+        self.setPhotos()
     }
     
     func updateFavoriteView(homeAd: Ad, date: Date?) {
@@ -64,7 +63,6 @@ final class AdListTableViewCell: UITableViewCell {
         self.infoView.layer.cornerRadius = 10.0
         self.infoView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         self.infoView.layer.masksToBounds = true
-        self.separatorView.backgroundColor = .black
     }
     
     private func setPhotos() {
@@ -104,3 +102,23 @@ final class AdListTableViewCell: UITableViewCell {
         }
     }
 }
+
+extension AdListTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.photosUrl.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.cellId, for: indexPath)
+        guard let photoCell = cell as? PhotoCell else { return UICollectionViewCell() }
+        photoCell.load(url: self.photosUrl[indexPath.row])
+        return photoCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.collectionView.frame.width - 10, height: self.collectionViewHeightConstraint.constant)
+    }
+    
+}
+
