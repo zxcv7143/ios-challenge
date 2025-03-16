@@ -14,7 +14,7 @@ final class AdListTableViewCell: UITableViewCell {
     @IBOutlet private weak var locationLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var charactericLabel: UILabel!
     @IBOutlet weak var savedInfoLabel: UILabel!
     @IBOutlet weak var favouriteAdButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
@@ -32,7 +32,7 @@ final class AdListTableViewCell: UITableViewCell {
         self.configureFavoriteAdButton(ad: homeAd)
     }
     
-    func updateFavoriteView(ad: Ad, date: Date?) {
+    func updateFavoriteView(ad: Ad) {
         self.currentAd = ad
         self.configureFavoriteAdButton(ad: ad)
     }
@@ -67,17 +67,18 @@ final class AdListTableViewCell: UITableViewCell {
     
     private func setupLabelsContent() {
         guard let currentAd else { return }
-        self.propertyTypeLabel.setStyle(font: UIFont.systemFont(ofSize: 15), textColor: UIColor.black, text: currentAd.propertyType.rawValue)
-        self.locationLabel.setStyle(font: UIFont.systemFont(ofSize: 15), textColor: UIColor.black, text: currentAd.address)
-        self.priceLabel.setStyle(font: UIFont.systemFont(ofSize: 15), textColor: UIColor.black, text: "\(currentAd.priceInfo.amount)\(currentAd.priceInfo.currencySuffix)")
+        self.propertyTypeLabel.setStyle(font: UIFont.boldSystemFont(ofSize: 15), textColor: UIColor.black, text: "\(currentAd.propertyType.rawValue.localized) \("in".localized) \(currentAd.address)")
+        self.locationLabel.setStyle(font: UIFont.systemFont(ofSize: 15), textColor: UIColor.black, text: "\(currentAd.neighborhood), \(currentAd.district)")
+        self.priceLabel.setStyle(font: UIFont.boldSystemFont(ofSize: 20), textColor: UIColor.black, text: currentAd.fullPrice)
+        self.charactericLabel.setStyle(font: UIFont.systemFont(ofSize: 10), textColor: UIColor.black, text: "\(currentAd.size) m², \(currentAd.rooms) \("Rooms".localized), \(currentAd.bathrooms) \("Bathrooms".localized)")
     }
     
     private func configureFavoriteAdButton(ad: Ad) {
         if ad.isFavorite {
             self.favouriteAdButton.setImage(UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
             let formatter = DateFormatter()
-            formatter.dateFormat = "dd/MM/yyyy HH:mm"
-            self.savedInfoLabel.setStyle(font: UIFont.systemFont(ofSize: 15), textColor: UIColor.black, text: "Saved on \(formatter.string(from: ad.dateSavedAsFavorite ?? Date()))")
+            formatter.dateFormat = "dd.MM.yyyy HH:mm"
+            self.savedInfoLabel.setStyle(font: UIFont.systemFont(ofSize: 10), textColor: UIColor.black, text: "\("AdSavedDate".localized) \(formatter.string(from: ad.dateSavedAsFavorite ?? Date()))")
             self.savedInfoLabel.isHidden = false
         } else {
             self.favouriteAdButton.setImage(UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate), for: .normal)

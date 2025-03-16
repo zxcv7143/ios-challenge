@@ -18,7 +18,7 @@ protocol AdListPresenterProtocol: AnyObject {
 
 protocol AdListInteractorOutputProtocol: AnyObject {
     func showFetchedAds(list: [Ad])
-    func favoriteAdSaved(with propertyCode: String, date: Date?)
+    func favoriteAdSaved(ad: FavouriteAd)
     func favoriteAdRemoved(with propertyCode: String)
     func showAlertError()
 }
@@ -39,7 +39,8 @@ final class AdListPresenter  {
     private func updateFavoriteAd(with propertyCode: String, isFavorite: Bool, date: Date?) {
         guard let index = adsList.firstIndex(where: { $0.propertyCode == propertyCode }), let view else { return }
         adsList[index].isFavorite = isFavorite
-        view.setFavoriteAd(with: index, of: adsList, date: isFavorite ? date : nil)
+        adsList[index].dateSavedAsFavorite = date
+        view.setFavoriteAd(with: index, of: adsList)
     }
 }
 
@@ -68,8 +69,8 @@ extension AdListPresenter: AdListPresenterProtocol {
 
 extension AdListPresenter: AdListInteractorOutputProtocol {
     
-    func favoriteAdSaved(with propertyCode: String, date: Date?) {
-        self.updateFavoriteAd(with: propertyCode, isFavorite: true, date: date)
+    func favoriteAdSaved(ad: FavouriteAd) {
+        self.updateFavoriteAd(with: ad.propertyCode ?? "0", isFavorite: true, date: ad.savingDate)
     }
 
     func favoriteAdRemoved(with propertyCode: String) {

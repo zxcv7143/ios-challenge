@@ -9,7 +9,7 @@ import CoreData
 @MainActor
 protocol AdListLocalDataManagerProtocol: AnyObject {
     func isFavouriteAd(propertyCode: String) -> Bool
-    func saveFavouriteAd(propertyCode: String, completion: (Bool, Date?) -> (Void))
+    func saveFavouriteAd(propertyCode: String, completion: (Bool, FavouriteAd?) -> (Void))
     func removeFavouriteAd(propertyCode: String, removed completion: (Bool) -> (Void))
     func fetchAllFavouriteAds()
     func fetchFavouriteAdSavingDate(by propertyCode: String) -> Date?
@@ -31,12 +31,12 @@ final class AdListLocalDataManager: AdListLocalDataManagerProtocol {
         }
     }
     
-    func saveFavouriteAd(propertyCode: String, completion: (Bool, Date?) -> (Void)) {
+    func saveFavouriteAd(propertyCode: String, completion: (Bool, FavouriteAd?) -> (Void)) {
         let ad = FavouriteAd(context: PersistenceManager.shared.managedContext)
         ad.propertyCode = propertyCode
         ad.savingDate = Date()
         PersistenceManager.shared.saveContext()
-        completion(true, ad.savingDate)
+        completion(true, ad)
     }
 
     func removeFavouriteAd(propertyCode: String, removed completion: (Bool) -> (Void)) {

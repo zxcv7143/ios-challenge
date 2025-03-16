@@ -15,7 +15,7 @@ protocol AdListInteractorInputProtocol {
 }
 
 protocol AdListLocalDataManagerOutputProtocol: AnyObject {
-    func favouriteAdSaved(with propertyCode: String, date: Date?)
+    func favouriteAdSaved(ad: FavouriteAd)
     func favouriteAdRemoved(with propertyCode: String)
     func showAlertError()
 }
@@ -62,9 +62,9 @@ final class AdsListInteractor: AdListInteractorInputProtocol {
                 removed ? favouriteAdRemoved(with: ad.propertyCode) : showAlertError()
             }
         } else {
-            localDataManager.saveFavouriteAd(propertyCode: ad.propertyCode) { [weak self] saved, savingDate in
-                guard let self else { return }
-                saved ? favouriteAdSaved(with: ad.propertyCode, date: savingDate) : showAlertError()
+            localDataManager.saveFavouriteAd(propertyCode: ad.propertyCode) { [weak self] saved, savedAd in
+                guard let self, let savedAd else { return }
+                saved ? favouriteAdSaved(ad: savedAd) : showAlertError()
             }
         }
     }
@@ -73,9 +73,9 @@ final class AdsListInteractor: AdListInteractorInputProtocol {
 // Protocol: LocalDataManager -> Interactor
 extension AdsListInteractor: AdListLocalDataManagerOutputProtocol {
     
-    func favouriteAdSaved(with propertyCode: String, date: Date?) {
+    func favouriteAdSaved(ad: FavouriteAd) {
         guard let presenter else { return }
-        presenter.favoriteAdSaved(with: propertyCode, date: date)
+        presenter.favoriteAdSaved(ad: ad)
     }
     
     func favouriteAdRemoved(with propertyCode: String) {

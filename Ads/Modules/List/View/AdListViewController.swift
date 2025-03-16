@@ -11,7 +11,7 @@ protocol AdListViewControllerProtocol: AnyObject {
     var presenter: AdListPresenterProtocol? { get set }
     func loadUI()
     func fetchedAds(list: [Ad])
-    func setFavoriteAd(with index: Int, of ads: [Ad], date: Date?)
+    func setFavoriteAd(with index: Int, of ads: [Ad])
     func showAlertError()
 }
 
@@ -94,12 +94,12 @@ extension AdListViewController: AdListViewControllerProtocol {
         }
     }
     
-    func setFavoriteAd(with index: Int, of ads: [Ad], date: Date?) {
+    func setFavoriteAd(with index: Int, of ads: [Ad]) {
         self.ads = ads
         guard let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? AdListTableViewCell else {
             return
         }
-        cell.updateFavoriteView(ad: self.ads[index], date: date)
+        cell.updateFavoriteView(ad: self.ads[index])
     }
     
     func hideBackButtonNavBar() {

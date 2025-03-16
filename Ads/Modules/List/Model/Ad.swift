@@ -56,6 +56,13 @@ struct Ad {
         self.multimedia = MultimediaInfo(images: dto.multimedia.images.map { ImageInfo(url: $0.url, tag: $0.tag)})
         self.features = Features(hasAirConditioning: dto.features.hasAirConditioning, hasBoxRoom: dto.features.hasBoxRoom, hasSwimmingPool: dto.features.hasSwimmingPool, hasTerrace: dto.features.hasTerrace, hasGarden: dto.features.hasGarden)
     }
+    
+    var fullAddress: String {
+        return "\(address),\(neighborhood)"
+    }
+    var fullPrice: String {
+        return "\(Double(priceInfo.amount).moneyFormat()) \(priceInfo.currencySuffix)"
+    }
 }
 
 struct PriceInfo {
