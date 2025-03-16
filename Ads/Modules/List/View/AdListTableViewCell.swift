@@ -7,20 +7,17 @@
 import UIKit
 
 final class AdListTableViewCell: UITableViewCell {
-    
+
     // MARK: IBOutlets
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var favoriteAdSavedView: UIView!
-    @IBOutlet private weak var favoriteAdSavedLabel: UILabel!
     @IBOutlet private weak var propertyTypeLabel: UILabel!
     @IBOutlet private weak var locationLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
-    @IBOutlet private weak var extraInfoLabel: UILabel!
-    @IBOutlet private weak var mapLocationImageView: UIImageView!
-    @IBOutlet private weak var infoView: UIView!
-    @IBOutlet private weak var favoriteAdImageView: UIImageView!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var savedInfoLabel: UILabel!
+    @IBOutlet weak var favouriteAdButton: UIButton!
+    @IBOutlet weak var mapButton: UIButton!
     // MARK: Vars
     static let cellId: String = "AdListTableViewCellId"
     weak var delegate: AdTableViewCellProtocol?
@@ -32,11 +29,12 @@ final class AdListTableViewCell: UITableViewCell {
         self.currentAd = homeAd
         self.setupLabelsContent()
         self.setPhotos()
+        self.configureFavoriteAdButton(ad: homeAd)
     }
     
-    func updateFavoriteView(homeAd: Ad, date: Date?) {
-        self.currentAd = homeAd
-        self.configureFavoriteAdViews(homeAd: homeAd)
+    func updateFavoriteView(ad: Ad, date: Date?) {
+        self.currentAd = ad
+        self.configureFavoriteAdButton(ad: ad)
     }
     
     // MARK: IBActions private functions
@@ -59,10 +57,6 @@ final class AdListTableViewCell: UITableViewCell {
         self.collectionView.layer.cornerRadius = 10.0
         self.collectionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         self.collectionView.layer.masksToBounds = true
-        self.infoView.backgroundColor = .white
-        self.infoView.layer.cornerRadius = 10.0
-        self.infoView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        self.infoView.layer.masksToBounds = true
     }
     
     private func setPhotos() {
@@ -78,27 +72,16 @@ final class AdListTableViewCell: UITableViewCell {
         self.priceLabel.setStyle(font: UIFont.systemFont(ofSize: 15), textColor: UIColor.black, text: "\(currentAd.priceInfo.amount)\(currentAd.priceInfo.currencySuffix)")
     }
     
-    private func configureMapLocationButton() {
-        self.mapLocationImageView.image = UIImage(systemName: "location.circle")?.withRenderingMode(.alwaysTemplate)
-        self.mapLocationImageView.tintColor = .yellow
-    }
-    
-    private func configureFavoriteAdSavedView() {
-        self.favoriteAdSavedView.layer.cornerRadius = 6
-        self.favoriteAdSavedView.backgroundColor = .black.withAlphaComponent(0.5)
-    }
-    
-    private func configureFavoriteAdViews(homeAd: Ad) {
-        if homeAd.isFavorite {
-            self.favoriteAdImageView.image = UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate)
-            self.favoriteAdImageView.tintColor = .red
-            self.favoriteAdSavedView.isHidden = false
+    private func configureFavoriteAdButton(ad: Ad) {
+        if ad.isFavorite {
+            self.favouriteAdButton.setImage(UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
             let formatter = DateFormatter()
-            formatter.dateFormat = "dd/MM/yyyy"
+            formatter.dateFormat = "dd/MM/yyyy HH:mm"
+            self.savedInfoLabel.setStyle(font: UIFont.systemFont(ofSize: 15), textColor: UIColor.black, text: "Saved on \(formatter.string(from: ad.dateSavedAsFavorite ?? Date()))")
+            self.savedInfoLabel.isHidden = false
         } else {
-            self.favoriteAdImageView.image = UIImage(systemName: "heart")?.withRenderingMode(.alwaysTemplate)
-            self.favoriteAdImageView.tintColor = .black
-            self.favoriteAdSavedView.isHidden = true
+            self.favouriteAdButton.setImage(UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            self.savedInfoLabel.isHidden = true
         }
     }
 }

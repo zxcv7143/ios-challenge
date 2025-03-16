@@ -33,13 +33,13 @@ final class AdListPresenter  {
     var router: AdListRouterProtocol?
     
     // Private vars
-    private var adsViewModel: [Ad] = []
+    private var adsList: [Ad] = []
     
     // Private functions
     private func updateFavoriteAd(with propertyCode: String, isFavorite: Bool, date: Date?) {
-        guard let index = adsViewModel.firstIndex(where: { $0.propertyCode == propertyCode }), let view else { return }
-        adsViewModel[index].isFavorite = isFavorite
-        view.setFavoriteAd(with: index, of: adsViewModel, date: isFavorite ? date : nil)
+        guard let index = adsList.firstIndex(where: { $0.propertyCode == propertyCode }), let view else { return }
+        adsList[index].isFavorite = isFavorite
+        view.setFavoriteAd(with: index, of: adsList, date: isFavorite ? date : nil)
     }
 }
 
@@ -83,6 +83,7 @@ extension AdListPresenter: AdListInteractorOutputProtocol {
     
     func showFetchedAds(list: [Ad]) {
         guard let view else { return }
+        self.adsList = list
         view.fetchedAds(list: list)
     }
 

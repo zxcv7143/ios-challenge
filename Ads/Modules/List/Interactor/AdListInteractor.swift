@@ -56,9 +56,16 @@ final class AdsListInteractor: AdListInteractorInputProtocol {
     @MainActor
     func setFavouriteAd(_ ad: Ad) {
         guard let localDataManager else { return }
-        localDataManager.saveFavouriteAd(propertyCode: ad.propertyCode) { [weak self] saved, savingDate in
-            guard let self else { return }
-            saved ? favouriteAdSaved(with: ad.propertyCode, date: savingDate) : showAlertError()
+        if ad.isFavorite {
+            localDataManager.removeFavouriteAd(propertyCode: ad.propertyCode) { [weak self] removed in
+                guard let self else { return }
+                removed ? favouriteAdRemoved(with: ad.propertyCode) : showAlertError()
+            }
+        } else {
+            localDataManager.saveFavouriteAd(propertyCode: ad.propertyCode) { [weak self] saved, savingDate in
+                guard let self else { return }
+                saved ? favouriteAdSaved(with: ad.propertyCode, date: savingDate) : showAlertError()
+            }
         }
     }
 }

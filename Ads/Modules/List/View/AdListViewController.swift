@@ -37,7 +37,6 @@ class AdListViewController: UITableViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.refreshControl = UIRefreshControl()
-//        self.tableView.register(UINib(nibName: AdTableViewCell.name, bundle: nil), forCellReuseIdentifier: AdTableViewCell.name)
     }
     
     private func setStyles() {
@@ -66,7 +65,7 @@ class AdListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: AdListTableViewCell.cellId, for: indexPath)
         guard let adCell = cell as? AdListTableViewCell else { return UITableViewCell() }
-        //adCell.delegate = self
+        adCell.delegate = self
         adCell.load(homeAd: self.ads[indexPath.row])
         return adCell
     }
@@ -100,7 +99,7 @@ extension AdListViewController: AdListViewControllerProtocol {
         guard let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? AdListTableViewCell else {
             return
         }
-        cell.updateFavoriteView(homeAd: self.ads[index], date: date)
+        cell.updateFavoriteView(ad: self.ads[index], date: date)
     }
     
     func hideBackButtonNavBar() {
