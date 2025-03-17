@@ -9,38 +9,71 @@ import SwiftUI
 struct DetailAdPage: View {
     
     let carrouselHeight = UIScreen.main.bounds.height * 0.4
+    
+    @State var showMap = false
+    
     @ObservedObject var viewModel: DetailAdPageViewModel
     
     var body: some View {
         ScrollView {
             VStack {
-                TabView {
-                    ForEach(viewModel.adDetail?.multimedia.images ?? [], id: \.url) { image in
-                        AsyncImage(url: URL(string: image.url)) { image in
-                            image.resizable()
-                                .scaledToFill()
-                        } placeholder: {
-                            ProgressView()
+                if showMap, let ad = viewModel.ad {
+                    MapView(ads: [ad])
+                        .frame(height: carrouselHeight)
+                } else {
+                    TabView {
+                        ForEach(viewModel.adDetail?.multimedia.images ?? [], id: \.url) { image in
+                            AsyncImage(url: URL(string: image.url)) { image in
+                                image.resizable()
+                                    .scaledToFill()
+                            } placeholder: {
+                                ProgressView()
+                            }
                         }
-                    }
-                }.tabViewStyle(.page).frame(height: carrouselHeight)
-                
-                HStack() {
-                    Text(viewModel.adDetail?.fullPrice ?? "")
-                    Button {
-                        viewModel.adDetail?.isFavorite.toggle()
-                    } label: {
-                        Image(systemName: (viewModel.adDetail?.isFavorite ?? false ? "star.fill" : "star")).foregroundColor(.red)
+                    }.tabViewStyle(.page).frame(height: carrouselHeight)
+                }
+                if viewModel.isFavourite {
+                    HStack() {
+                        Text("\("AdSavedDate".localized) \(viewModel.adDetail?.dateSavedAsFavorite?.formattedDate() ?? "")")
+                            .font(.system(size: 10, weight: .light, design: .default)).padding(.trailing)
                     }
                 }
-    
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(viewModel.adDetail?.characteristicString ?? "")
+                            .font(.system(size: 15, weight: .light, design: .default))
+                        
+                        Text(viewModel.adDetail?.fullPrice ?? "")
+                            .font(.system(size: 20, weight: .bold, design: .default))
+                    }.padding()
+                    Spacer()
+                    Button {
+                        showMap.toggle()
+                    } label: {
+                        Image(systemName: "map").foregroundColor(.black)
+                    }.padding()
+                    
+                    VStack {
+                        Button {
+                            if viewModel.isFavourite {
+                                viewModel.removeFavouriteAd()
+                            } else {
+                                viewModel.saveFavouriteAd()
+                            }
+                        } label: {
+                            Image(systemName: (viewModel.isFavourite ? "star.fill" : "star")).foregroundColor(.red)
+                        }
+                        
+                    }.padding()
+                    
+                }
                 Text(viewModel.adDetail?.propertyComment ?? "")
-                    .font(.body)
+                    .font(.system(size: 15, weight: .light, design: .default))
                     .padding()
             }.onAppear {
                 viewModel.getDetailAd()
             }
-        }.navigationTitle(viewModel.adDetail?.operation ?? "")
+        }.navigationTitle(viewModel.adDetail?.extendedPropertyType.localized ?? "")
     }
 }
     

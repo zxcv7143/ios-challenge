@@ -14,3 +14,9 @@ enum NetworkError: Error {
     case invalidResponse
     case invalidData
 }
+
+enum CoreDataError: Error {
+    case errorSavingData
+    case errorRemovingData
+    case errorFetchingData
+}

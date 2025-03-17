@@ -15,13 +15,14 @@ protocol AdListPresenterProtocol: AnyObject {
     @MainActor func getAllAds()
     @MainActor func favoriteAdAction(_ ad: Ad)
     @MainActor func goToDetailAd(with ad: Ad)
+    @MainActor func showAdLocationsOnMap(ads: [Ad])
 }
 
 protocol AdListInteractorOutputProtocol: AnyObject {
     func showFetchedAds(list: [Ad])
     func favoriteAdSaved(ad: FavouriteAd)
     func favoriteAdRemoved(with propertyCode: String)
-    func showAlertError()
+    
 }
 
 
@@ -48,7 +49,7 @@ final class AdListPresenter  {
 extension AdListPresenter: AdListPresenterProtocol {
     func goToDetailAd(with ad: Ad) {
         guard let router else { return }
-        router.goToDetailAd(currentViewController: view)
+        router.goToDetailAd(currentViewController: view, ad: ad)
     }
     
     
@@ -70,6 +71,11 @@ extension AdListPresenter: AdListPresenterProtocol {
         guard let interactor else { return }
         interactor.setFavouriteAd(ad)
     }
+    
+    @MainActor func showAdLocationsOnMap(ads: [Ad]) {
+        guard let view, let router else { return }
+        router.goToMapView(currentViewController: view, ad: ads)
+    }
 }
 
 
@@ -81,11 +87,6 @@ extension AdListPresenter: AdListInteractorOutputProtocol {
 
     func favoriteAdRemoved(with propertyCode: String) {
         self.updateFavoriteAd(with: propertyCode, isFavorite: false, date: nil)
-    }
-    
-    func showAlertError() {
-        guard let view else { return }
-        view.showAlertError()
     }
     
     func showFetchedAds(list: [Ad]) {

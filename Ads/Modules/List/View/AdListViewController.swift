@@ -12,11 +12,10 @@ protocol AdListViewControllerProtocol: AnyObject {
     func loadUI()
     func fetchedAds(list: [Ad])
     func setFavoriteAd(with index: Int, of ads: [Ad])
-    func showAlertError()
 }
 
 protocol AdTableViewCellProtocol: AnyObject {
-    func showAdLocationOnMap(latitude: CGFloat, longitude: CGFloat)
+    func showAdLocationsOnMap()
     func favoriteAdAction(_ ad: Ad)
 }
 
@@ -105,19 +104,15 @@ extension AdListViewController: AdListViewControllerProtocol {
     func hideBackButtonNavBar() {
         self.navigationItem.leftBarButtonItem = nil
     }
-    
-    func showAlertError() {
-        //self.showErrorAlert(title: "Error")
-    }
 }
 
 
 // Protocol: AdTableViewCell -> View
 extension AdListViewController: AdTableViewCellProtocol {
     
-    func showAdLocationOnMap(latitude: CGFloat, longitude: CGFloat) {
-        //guard let presenter else { return }
-        //presenter.showAdLocationOnMap(latitude: latitude, longitude: longitude)
+    func showAdLocationsOnMap() {
+        guard let presenter else { return }
+        presenter.showAdLocationsOnMap(ads: self.ads)
     }
     
     func favoriteAdAction(_ ad: Ad) {

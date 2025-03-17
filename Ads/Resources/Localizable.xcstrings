@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
     "AdSavedDate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -63,6 +73,17 @@
         }
       }
     },
+    "rent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "alquiler"
+          }
+        }
+      }
+    },
     "Rooms" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -70,6 +91,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Habitaciones"
+          }
+        }
+      }
+    },
+    "sale" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "venta"
           }
         }
       }

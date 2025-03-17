@@ -14,8 +14,7 @@ extension Double {
         formatter.groupingSeparator = "."
         formatter.groupingSize = 3
         formatter.decimalSeparator = ","
-        formatter.minimumFractionDigits = 1
-        formatter.maximumFractionDigits = 1
+        formatter.minimumFractionDigits = 2
         if let formattedNumber = formatter.string(from: NSNumber(value: self)) {
             return formattedNumber
         } else { return "" }

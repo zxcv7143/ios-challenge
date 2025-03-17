@@ -39,8 +39,8 @@ final class AdListTableViewCell: UITableViewCell {
     
     // MARK: IBActions private functions
     @IBAction private func seeOnMapAction(_ sender: Any) {
-        guard let delegate = self.delegate, let homeAd = self.currentAd else { return }
-        delegate.showAdLocationOnMap(latitude: homeAd.latitude, longitude: homeAd.longitude)
+        guard let delegate = self.delegate else { return }
+        delegate.showAdLocationsOnMap()
     }
     
     @IBAction private func favoriteAdAction(_ sender: Any) {
@@ -76,9 +76,7 @@ final class AdListTableViewCell: UITableViewCell {
     private func configureFavoriteAdButton(ad: Ad) {
         if ad.isFavorite {
             self.favouriteAdButton.setImage(UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd.MM.yyyy HH:mm"
-            self.savedInfoLabel.setStyle(font: UIFont.systemFont(ofSize: 10), textColor: UIColor.black, text: "\("AdSavedDate".localized) \(formatter.string(from: ad.dateSavedAsFavorite ?? Date()))")
+            self.savedInfoLabel.setStyle(font: UIFont.systemFont(ofSize: 10), textColor: UIColor.black, text: "\("AdSavedDate".localized) \(ad.dateSavedAsFavorite?.formattedDate() ?? "")")
             self.savedInfoLabel.isHidden = false
         } else {
             self.favouriteAdButton.setImage(UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate), for: .normal)

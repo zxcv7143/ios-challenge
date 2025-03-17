@@ -17,7 +17,6 @@ protocol AdListInteractorInputProtocol {
 protocol AdListLocalDataManagerOutputProtocol: AnyObject {
     func favouriteAdSaved(ad: FavouriteAd)
     func favouriteAdRemoved(with propertyCode: String)
-    func showAlertError()
 }
 
 // MARK: - Class
@@ -32,7 +31,7 @@ final class AdsListInteractor: AdListInteractorInputProtocol {
     // Protocol functions
     @MainActor
     func getAllAds() {
-        guard let url = URL(string: Urls.AdList.adList), let localDataManager, let presenter else {
+        guard let url = URL(string: Urls.AdList.adList), let localDataManager else {
             return
         }
         httpClient.performRequest(url: url, responseType: [AdDTO].self) { [weak self] result in
@@ -48,8 +47,7 @@ final class AdsListInteractor: AdListInteractorInputProtocol {
                         return mutableAd
                     }
                     presenter.showFetchedAds(list: adList)
-                case .failure:
-                    presenter.showAlertError()
+                case .failure: break
             }
         }
     }
@@ -59,12 +57,16 @@ final class AdsListInteractor: AdListInteractorInputProtocol {
         if ad.isFavorite {
             localDataManager.removeFavouriteAd(propertyCode: ad.propertyCode) { [weak self] removed in
                 guard let self else { return }
-                removed ? favouriteAdRemoved(with: ad.propertyCode) : showAlertError()
+                if removed {
+                    favouriteAdRemoved(with: ad.propertyCode)
+                }
             }
         } else {
             localDataManager.saveFavouriteAd(propertyCode: ad.propertyCode) { [weak self] saved, savedAd in
                 guard let self, let savedAd else { return }
-                saved ? favouriteAdSaved(ad: savedAd) : showAlertError()
+                if saved {
+                    favouriteAdSaved(ad: savedAd)
+                }
             }
         }
     }
@@ -81,11 +83,6 @@ extension AdsListInteractor: AdListLocalDataManagerOutputProtocol {
     func favouriteAdRemoved(with propertyCode: String) {
         guard let presenter else { return }
         presenter.favoriteAdRemoved(with: propertyCode)
-    }
-    
-    func showAlertError() {
-        guard let presenter else { return }
-        presenter.showAlertError()
     }
 }
 

@@ -10,13 +10,15 @@ import SwiftUI
 @MainActor
 protocol AdListRouterProtocol: AnyObject {
     static func createAdListModule() -> UIViewController
-    func goToDetailAd(currentViewController: AdListViewControllerProtocol?)
+    func goToDetailAd(currentViewController: AdListViewControllerProtocol?, ad: Ad)
+    func goToMapView(currentViewController: AdListViewControllerProtocol?, ad: [Ad])
 }
 
 
 // MARK: - Class
 @MainActor
 final class AdListRouter: AdListRouterProtocol {
+    
     
     static func createAdListModule() -> UIViewController {
         // Initializing VIPER module variables
@@ -35,12 +37,18 @@ final class AdListRouter: AdListRouterProtocol {
         return view
     }
     
-    func goToDetailAd(currentViewController: AdListViewControllerProtocol?) {
+    func goToDetailAd(currentViewController: AdListViewControllerProtocol?, ad: Ad) {
         guard let viewController = currentViewController as? UIViewController,
               let navigationController = viewController.navigationController else { return }
-        let detailPageViewController = UIHostingController(rootView: DetailAdPage(viewModel: DetailAdPageViewModel()))
+        let detailPageViewController = UIHostingController(rootView: DetailAdPage(viewModel: DetailAdPageViewModel(ad: ad)))
         navigationController.pushViewController(detailPageViewController, animated: true)
     }
-        
+    
+    func goToMapView(currentViewController: AdListViewControllerProtocol?, ad: [Ad]) {
+        guard let viewController = currentViewController as? UIViewController,
+              let navigationController = viewController.navigationController else { return }
+        let mapViewController = UIHostingController(rootView: MapView(ads: ad))
+        navigationController.pushViewController(mapViewController, animated: true)
+    }
 }
 
