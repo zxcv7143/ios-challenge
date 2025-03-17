@@ -67,6 +67,9 @@
                                                 <outlet property="delegate" destination="XXk-Us-EpJ" id="wHN-yM-l1f"/>
                                             </connections>
                                         </collectionView>
+                                        <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="HGE-Ez-46W">
+                                            <rect key="frame" x="160" y="108" width="73" height="26"/>
+                                        </pageControl>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9w-C6-sJt">
                                             <rect key="frame" x="10" y="153" width="41.333333333333336" height="20.333333333333343"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -126,11 +129,14 @@
                                         <constraint firstItem="Zwv-ya-a8r" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rOF-Bc-t5i" secondAttribute="leading" constant="20" symbolic="YES" id="Qho-kn-u0C"/>
                                         <constraint firstItem="Zwv-ya-a8r" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="y9w-C6-sJt" secondAttribute="trailing" constant="8" symbolic="YES" id="Rsj-8d-3Mb"/>
                                         <constraint firstItem="SdJ-xC-w6q" firstAttribute="top" secondItem="Git-nj-mMS" secondAttribute="bottom" constant="10" id="Txu-Bi-Vkx"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6Zl-71-bLv" secondAttribute="trailing" constant="20" symbolic="YES" id="XEe-PU-AhX"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Zwv-ya-a8r" secondAttribute="trailing" id="XU1-A7-Gtq"/>
+                                        <constraint firstItem="HGE-Ez-46W" firstAttribute="top" secondItem="zWE-i9-fyq" secondAttribute="bottom" constant="-30" id="ZUk-OU-hPy"/>
                                         <constraint firstItem="E65-MR-JUa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Git-nj-mMS" secondAttribute="trailing" constant="8" symbolic="YES" id="ajK-uP-BEt"/>
                                         <constraint firstItem="SdJ-xC-w6q" firstAttribute="leading" secondItem="Git-nj-mMS" secondAttribute="leading" id="bGd-K1-Fnh"/>
                                         <constraint firstItem="Zwv-ya-a8r" firstAttribute="firstBaseline" secondItem="y9w-C6-sJt" secondAttribute="firstBaseline" id="cdc-Kv-dZh"/>
                                         <constraint firstItem="zWE-i9-fyq" firstAttribute="leading" secondItem="rOF-Bc-t5i" secondAttribute="leading" constant="10" id="gdU-sZ-V2t"/>
+                                        <constraint firstItem="HGE-Ez-46W" firstAttribute="centerX" secondItem="rOF-Bc-t5i" secondAttribute="centerX" id="hCd-N3-gK0"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="E65-MR-JUa" secondAttribute="bottom" constant="30" id="jQ9-Nf-Cwr"/>
                                         <constraint firstItem="E65-MR-JUa" firstAttribute="top" secondItem="Zwv-ya-a8r" secondAttribute="bottom" constant="10" id="kM4-JL-m77"/>
                                         <constraint firstItem="6Zl-71-bLv" firstAttribute="top" secondItem="SdJ-xC-w6q" secondAttribute="bottom" constant="10" id="msl-vL-JkK"/>
@@ -149,6 +155,7 @@
                                     <outlet property="favouriteAdButton" destination="Zwv-ya-a8r" id="2mh-h6-0CC"/>
                                     <outlet property="locationLabel" destination="Git-nj-mMS" id="Ge2-Eh-DWz"/>
                                     <outlet property="mapButton" destination="E65-MR-JUa" id="pGv-7h-fkt"/>
+                                    <outlet property="pageControl" destination="HGE-Ez-46W" id="TaL-1C-4OC"/>
                                     <outlet property="priceLabel" destination="SdJ-xC-w6q" id="Mn5-iL-sjb"/>
                                     <outlet property="propertyTypeLabel" destination="y9w-C6-sJt" id="OyH-Zx-GA6"/>
                                     <outlet property="savedInfoLabel" destination="Wwj-vY-LXQ" id="eaq-UE-23j"/>

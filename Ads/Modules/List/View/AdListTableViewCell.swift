@@ -87,8 +87,8 @@ final class AdListTableViewCell: UITableViewCell {
     }
     
     @IBAction func pageChanged(_ sender: Any) {
-        let x = CGFloat(self.pageControl.currentPage) * self.collectionView.frame.size.width
-        self.collectionView.setContentOffset(CGPointMake(x, 0), animated: true)
+        //let x = CGFloat(self.pageControl.currentPage) * self.collectionView.frame.size.width
+        //self.collectionView.setContentOffset(CGPointMake(x, 0), animated: true)
     }
     
 }
