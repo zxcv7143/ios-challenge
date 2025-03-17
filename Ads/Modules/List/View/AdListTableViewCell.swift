@@ -9,6 +9,7 @@ import UIKit
 final class AdListTableViewCell: UITableViewCell {
 
     // MARK: IBOutlets
+    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var propertyTypeLabel: UILabel!
     @IBOutlet private weak var locationLabel: UILabel!
@@ -62,6 +63,7 @@ final class AdListTableViewCell: UITableViewCell {
     private func setPhotos() {
         guard let photos = currentAd?.multimedia else { return }
         self.photosUrl = photos.images.map { $0.url }
+        self.pageControl.numberOfPages = self.photosUrl.count
         self.collectionView.reloadData()
     }
     
@@ -83,6 +85,12 @@ final class AdListTableViewCell: UITableViewCell {
             self.savedInfoLabel.isHidden = true
         }
     }
+    
+    @IBAction func pageChanged(_ sender: Any) {
+        let x = CGFloat(self.pageControl.currentPage) * self.collectionView.frame.size.width
+        self.collectionView.setContentOffset(CGPointMake(x, 0), animated: true)
+    }
+    
 }
 
 extension AdListTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -102,5 +110,11 @@ extension AdListTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
         return CGSize(width: self.collectionView.frame.width - 10, height: self.collectionViewHeightConstraint.constant)
     }
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+            
+        let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
+            pageControl.currentPage = Int(pageNumber)
+
+    }
 }
 
