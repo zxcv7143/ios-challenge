@@ -20,13 +20,17 @@ protocol AdListLocalDataManagerOutputProtocol: AnyObject {
 }
 
 // MARK: - Class
-final class AdsListInteractor: AdListInteractorInputProtocol {
+final class AdListInteractor: AdListInteractorInputProtocol {
     
     // Protocols vars
     weak var presenter: AdListInteractorOutputProtocol?
     var localDataManager: AdListLocalDataManagerProtocol?
     
-    private let httpClient: HTTPClientProtocol = NetworkClient()
+    private let httpClient: HTTPClientProtocol
+    
+    init(httpClient: HTTPClientProtocol = NetworkClient()) {
+        self.httpClient = httpClient
+    }
     
     // Protocol functions
     @MainActor
@@ -42,7 +46,7 @@ final class AdsListInteractor: AdListInteractorInputProtocol {
                     var adList = ads.map { Ad(dto: $0) }
                     adList = adList.map { ad in
                         var mutableAd = ad
-                        mutableAd.isFavorite = localDataManager.isFavouriteAd(propertyCode: ad.propertyCode)
+                        mutableAd.isFavourite = localDataManager.isFavouriteAd(propertyCode: ad.propertyCode)
                         mutableAd.dateSavedAsFavorite = localDataManager.fetchFavouriteAdSavingDate(by: ad.propertyCode)
                         return mutableAd
                     }
@@ -54,7 +58,7 @@ final class AdsListInteractor: AdListInteractorInputProtocol {
     @MainActor
     func setFavouriteAd(_ ad: Ad) {
         guard let localDataManager else { return }
-        if ad.isFavorite {
+        if ad.isFavourite {
             localDataManager.removeFavouriteAd(propertyCode: ad.propertyCode) { [weak self] removed in
                 guard let self else { return }
                 if removed {
@@ -73,7 +77,7 @@ final class AdsListInteractor: AdListInteractorInputProtocol {
 }
 
 // Protocol: LocalDataManager -> Interactor
-extension AdsListInteractor: AdListLocalDataManagerOutputProtocol {
+extension AdListInteractor: AdListLocalDataManagerOutputProtocol {
     
     func favouriteAdSaved(ad: FavouriteAd) {
         guard let presenter else { return }

@@ -40,7 +40,7 @@ final class AdListPresenter  {
     // Private functions
     private func updateFavoriteAd(with propertyCode: String, isFavorite: Bool, date: Date?) {
         guard let index = adsList.firstIndex(where: { $0.propertyCode == propertyCode }), let view else { return }
-        adsList[index].isFavorite = isFavorite
+        adsList[index].isFavourite = isFavorite
         adsList[index].dateSavedAsFavorite = date
         view.setFavoriteAd(with: index, of: adsList)
     }

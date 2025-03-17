@@ -24,7 +24,7 @@ final class AdListRouter: AdListRouterProtocol {
         // Initializing VIPER module variables
         guard let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "adListId") as? AdListViewController else { return AdListViewController() }
         let presenter: AdListPresenterProtocol & AdListInteractorOutputProtocol = AdListPresenter()
-        var interactor: AdListInteractorInputProtocol & AdListLocalDataManagerOutputProtocol = AdsListInteractor()
+        var interactor: AdListInteractorInputProtocol & AdListLocalDataManagerOutputProtocol = AdListInteractor()
         let localDataManager: AdListLocalDataManagerProtocol = AdListLocalDataManager()
         let router: AdListRouterProtocol = AdListRouter()
         // Assigning VIPER module variables

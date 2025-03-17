@@ -11,7 +11,6 @@ protocol AdListLocalDataManagerProtocol: AnyObject {
     func isFavouriteAd(propertyCode: String) -> Bool
     func saveFavouriteAd(propertyCode: String, completion: (Bool, FavouriteAd?) -> (Void))
     func removeFavouriteAd(propertyCode: String, removed completion: (Bool) -> (Void))
-    func fetchAllFavouriteAds()
     func fetchFavouriteAdSavingDate(by propertyCode: String) -> Date?
 }
 
@@ -52,19 +51,6 @@ final class AdListLocalDataManager: AdListLocalDataManagerProtocol {
         }
     }
 
-    func fetchAllFavouriteAds() {
-        let fetchRequest: NSFetchRequest<FavouriteAd> = FavouriteAd.fetchRequest()
-        do {
-            let ads = try PersistenceManager.shared.managedContext.fetch(fetchRequest)
-            for ad in ads {
-                print("\n= = = = ")
-                print(ad.propertyCode!)
-                print("= = = = ")
-            }
-        } catch {
-            print("Error fetch ads: \(error)")
-        }
-    }
     
     func fetchFavouriteAdSavingDate(by propertyCode: String) -> Date? {
         let fetchRequest: NSFetchRequest<FavouriteAd> = FavouriteAd.fetchRequest()

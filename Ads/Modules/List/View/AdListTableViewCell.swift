@@ -76,7 +76,7 @@ final class AdListTableViewCell: UITableViewCell {
     }
     
     private func configureFavoriteAdButton(ad: Ad) {
-        if ad.isFavorite {
+        if ad.isFavourite {
             self.favouriteAdButton.setImage(UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
             self.savedInfoLabel.setStyle(font: UIFont.systemFont(ofSize: 10), textColor: UIColor.black, text: "\("AdSavedDate".localized) \(ad.dateSavedAsFavorite?.formattedDate() ?? "")")
             self.savedInfoLabel.isHidden = false

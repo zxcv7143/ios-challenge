@@ -12,6 +12,7 @@ import Foundation
 // MARK: - Protocols
 protocol HTTPClientProtocol {
     func performRequest<T: Decodable>(url: URL, responseType: T.Type, completion: @escaping (Result<T, Error>) -> Void)
+    func performRequest<T: Decodable>(url: URL, responseType: T.Type) async -> Result<T, Error>
 }
 
 

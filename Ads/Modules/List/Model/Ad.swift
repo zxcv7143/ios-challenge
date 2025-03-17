@@ -29,7 +29,7 @@ struct Ad {
     let description: String
     let multimedia: MultimediaInfo
     let features: Features
-    var isFavorite: Bool = false
+    var isFavourite: Bool = false
     var dateSavedAsFavorite: Date? = nil
     
     init(dto: AdDTO) {
