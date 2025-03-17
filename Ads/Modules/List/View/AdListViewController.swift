@@ -71,8 +71,8 @@ class AdListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //guard let presenter else { return }
-        //presenter.goToDetailAd()
+        guard let presenter else { return }
+        presenter.goToDetailAd(with: self.ads[indexPath.row])
     }
 }
 

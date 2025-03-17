@@ -14,6 +14,7 @@ protocol AdListPresenterProtocol: AnyObject {
     @MainActor func viewDidLoad()
     @MainActor func getAllAds()
     @MainActor func favoriteAdAction(_ ad: Ad)
+    @MainActor func goToDetailAd(with ad: Ad)
 }
 
 protocol AdListInteractorOutputProtocol: AnyObject {
@@ -45,6 +46,11 @@ final class AdListPresenter  {
 }
 
 extension AdListPresenter: AdListPresenterProtocol {
+    func goToDetailAd(with ad: Ad) {
+        guard let router else { return }
+        router.goToDetailAd(currentViewController: view)
+    }
+    
     
     @MainActor
     func viewDidLoad() {

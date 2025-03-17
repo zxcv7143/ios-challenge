@@ -5,10 +5,12 @@
 //  Created by Anton Zuev on 14/3/25.
 //
 import UIKit
+import SwiftUI
 // MARK: - Protocols
 @MainActor
 protocol AdListRouterProtocol: AnyObject {
     static func createAdListModule() -> UIViewController
+    func goToDetailAd(currentViewController: AdListViewControllerProtocol?)
 }
 
 
@@ -32,5 +34,13 @@ final class AdListRouter: AdListRouterProtocol {
         interactor.localDataManager = localDataManager
         return view
     }
+    
+    func goToDetailAd(currentViewController: AdListViewControllerProtocol?) {
+        guard let viewController = currentViewController as? UIViewController,
+              let navigationController = viewController.navigationController else { return }
+        let detailPageViewController = UIHostingController(rootView: DetailAdPage(viewModel: DetailAdPageViewModel()))
+        navigationController.pushViewController(detailPageViewController, animated: true)
+    }
+        
 }
 
