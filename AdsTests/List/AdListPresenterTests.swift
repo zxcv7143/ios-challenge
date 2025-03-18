@@ -11,7 +11,7 @@ import Testing
 struct AdListPresenterTests {
     
     @Test("Test getting all ads") @MainActor
-    func testGetAllAds() async throws {
+    func testGetAllAds() async {
         let presenter = AdListPresenter()
         let interactor = MockAdListInteractor()
         let viewController = MockAdListViewController()
@@ -19,12 +19,12 @@ struct AdListPresenterTests {
         presenter.view = viewController
         presenter.interactor = interactor
         presenter.router = router
-        presenter.getAllAds()
+        await presenter.getAllAds()
         #expect(interactor.getAllAdsCalled)
     }
     
     @Test("Test getting all ads at first load") @MainActor
-    func testGetAllAdsAtFirstLoad() async throws {
+    func testGetAllAdsAtFirstLoad() async {
         let presenter = AdListPresenter()
         let interactor = MockAdListInteractor()
         let viewController = MockAdListViewController()
@@ -32,12 +32,12 @@ struct AdListPresenterTests {
         presenter.view = viewController
         presenter.interactor = interactor
         presenter.router = router
-        presenter.viewDidLoad()
+        await presenter.viewDidLoad()
         #expect(interactor.getAllAdsCalled)
     }
     
     @Test("Test going to detail ad page") @MainActor
-    func testGoToDetailPage() async throws {
+    func testGoToDetailPage() {
         let presenter = AdListPresenter()
         let interactor = MockAdListInteractor()
         let viewController = MockAdListViewController()
@@ -51,7 +51,7 @@ struct AdListPresenterTests {
     }
     
     @Test("Test going to detatil ad page") @MainActor
-    func testFavouriteAdAction() async throws {
+    func testFavouriteAdAction() {
         let presenter = AdListPresenter()
         let interactor = MockAdListInteractor()
         let viewController = MockAdListViewController()
@@ -65,7 +65,7 @@ struct AdListPresenterTests {
     }
     
     @Test("Test show ad location on map") @MainActor
-    func testShowLocationsOnMap() async throws {
+    func testShowLocationsOnMap() {
         let presenter = AdListPresenter()
         let interactor = MockAdListInteractor()
         let viewController = MockAdListViewController()

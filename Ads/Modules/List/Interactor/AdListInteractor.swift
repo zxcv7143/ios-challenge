@@ -10,7 +10,7 @@ import Foundation
 protocol AdListInteractorInputProtocol {
     var localDataManager: AdListLocalDataManagerProtocol? { get set }
     var presenter: AdListInteractorOutputProtocol? { get set }
-    @MainActor func getAllAds()
+    @MainActor func getAllAds() async
     @MainActor func setFavouriteAd(_ ad: Ad)
 }
 
@@ -34,25 +34,24 @@ final class AdListInteractor: AdListInteractorInputProtocol {
     
     // Protocol functions
     @MainActor
-    func getAllAds() {
+    func getAllAds() async {
         guard let url = URL(string: Urls.AdList.adList), let localDataManager else {
             return
         }
-        httpClient.performRequest(url: url, responseType: [AdDTO].self) { [weak self] result in
-            guard let self else { return }
-            switch result {
-                case .success(let ads):
-                    guard let presenter = self.presenter else { return }
-                    var adList = ads.map { Ad(dto: $0) }
-                    adList = adList.map { ad in
-                        var mutableAd = ad
-                        mutableAd.isFavourite = localDataManager.isFavouriteAd(propertyCode: ad.propertyCode)
-                        mutableAd.dateSavedAsFavourite = localDataManager.fetchFavouriteAdSavingDate(by: ad.propertyCode)
-                        return mutableAd
-                    }
-                    presenter.showFetchedAds(list: adList)
-                case .failure: break
+        let result = await httpClient.performRequest(url: url, responseType: [AdDTO].self)
+        
+        switch result {
+        case .success(let ads):
+            guard let presenter = self.presenter else { return }
+            var adList = ads.map { Ad(dto: $0) }
+            adList = adList.map { ad in
+                var mutableAd = ad
+                mutableAd.isFavourite = localDataManager.isFavouriteAd(propertyCode: ad.propertyCode)
+                mutableAd.dateSavedAsFavourite = localDataManager.fetchFavouriteAdSavingDate(by: ad.propertyCode)
+                return mutableAd
             }
+            presenter.showFetchedAds(list: adList)
+        case .failure: break
         }
     }
     @MainActor

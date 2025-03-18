@@ -90,6 +90,7 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zwv-ya-a8r">
                                             <rect key="frame" x="321" y="112.33333333333331" width="52" height="101.66666666666669"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="favouriteButton"/>
                                             <color key="tintColor" red="0.92493712900000002" green="0.36164450650000002" blue="0.33721011880000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
@@ -99,6 +100,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E65-MR-JUa">
                                             <rect key="frame" x="323" y="224" width="50" height="35"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="mapButton"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="location.fill" catalog="system"/>
                                             <connections>

@@ -51,7 +51,7 @@ struct DetailAdPage<ViewModel>: View where ViewModel: DetailAdPageViewModelProto
                         showMap.toggle()
                     } label: {
                         Image(systemName: "map").foregroundColor(.black)
-                    }.padding()
+                    }.padding().accessibilityIdentifier("detailMapButton")
                     
                     VStack {
                         Button {
@@ -64,7 +64,7 @@ struct DetailAdPage<ViewModel>: View where ViewModel: DetailAdPageViewModelProto
                             Image(systemName: (viewModel.isFavourite ? "star.fill" : "star")).foregroundColor(.red)
                         }
                         
-                    }.padding()
+                    }.padding().accessibilityIdentifier("detailFavouriteButton")
                     
                 }
                 Text(viewModel.adDetail?.propertyComment ?? "")

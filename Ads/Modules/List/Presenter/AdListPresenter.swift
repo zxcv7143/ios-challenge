@@ -11,8 +11,8 @@ protocol AdListPresenterProtocol: AnyObject {
     var interactor: AdListInteractorInputProtocol? { get set }
     var router: AdListRouterProtocol? { get set }
     
-    @MainActor func viewDidLoad()
-    @MainActor func getAllAds()
+    @MainActor func viewDidLoad() async
+    @MainActor func getAllAds() async
     @MainActor func favouriteAdAction(_ ad: Ad)
     @MainActor func goToDetailAd(with ad: Ad)
     @MainActor func showAdLocationsOnMap(ads: [Ad])
@@ -54,16 +54,16 @@ extension AdListPresenter: AdListPresenterProtocol {
     
     
     @MainActor
-    func viewDidLoad() {
+    func viewDidLoad() async {
         guard let view = self.view else { return }
         view.loadUI()
-        self.getAllAds()
+        await self.getAllAds()
     }
     
     @MainActor
-    func getAllAds() {
+    func getAllAds() async {
         guard let interactor = self.interactor else { return }
-        interactor.getAllAds()
+        await interactor.getAllAds()
     }
     
     @MainActor

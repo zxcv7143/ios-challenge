@@ -25,10 +25,12 @@ class AdListViewController: UITableViewController {
     
     private var ads: [Ad] = []
 
-    override func viewDidLoad() {
+    override func viewDidLoad()  {
         super.viewDidLoad()
         guard let presenter else { return }
-        presenter.viewDidLoad()
+        Task {
+            await presenter.viewDidLoad()
+        }
     }
     
     // Private functions
@@ -50,7 +52,9 @@ class AdListViewController: UITableViewController {
     
     @objc func refreshData() {
         guard let presenter = self.presenter else { return }
-        presenter.getAllAds()
+        Task {
+            await presenter.getAllAds()
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

@@ -64,6 +64,7 @@ struct MapView: View {
                }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .accessibilityIdentifier("mapView")
     }
 }
 
