@@ -30,7 +30,7 @@ struct Ad {
     let multimedia: MultimediaInfo
     let features: Features
     var isFavourite: Bool = false
-    var dateSavedAsFavorite: Date? = nil
+    var dateSavedAsFavourite: Date? = nil
     
     init(dto: AdDTO) {
         self.propertyCode = dto.propertyCode

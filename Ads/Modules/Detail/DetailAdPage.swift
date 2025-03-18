@@ -6,13 +6,13 @@
 //
 import SwiftUI
 
-struct DetailAdPage: View {
+struct DetailAdPage<ViewModel>: View where ViewModel: DetailAdPageViewModelProtocol {
     
     let carrouselHeight = UIScreen.main.bounds.height * 0.4
     
     @State var showMap = false
     
-    @ObservedObject var viewModel: DetailAdPageViewModel
+    @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         ScrollView {
@@ -34,7 +34,7 @@ struct DetailAdPage: View {
                 }
                 if viewModel.isFavourite {
                     HStack() {
-                        Text("\("AdSavedDate".localized) \(viewModel.adDetail?.dateSavedAsFavorite?.formattedDate() ?? "")")
+                        Text("\("AdSavedDate".localized) \(viewModel.adDetail?.dateSavedAsFavourite?.formattedDate() ?? "")")
                             .font(.system(size: 10, weight: .light, design: .default)).padding(.trailing)
                     }
                 }

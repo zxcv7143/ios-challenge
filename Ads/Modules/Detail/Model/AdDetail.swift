@@ -23,8 +23,8 @@ struct AdDetail {
     let country: String
     let moreCharacteristics: Characteristics
     let energyCertification: EnergyCertification
-    var isFavorite: Bool = false
-    var dateSavedAsFavorite: Date? = nil
+    var isFavourite: Bool = false
+    var dateSavedAsFavourite: Date? = nil
     
     init(dto: AdDetailDTO) {
         self.adid = dto.adid

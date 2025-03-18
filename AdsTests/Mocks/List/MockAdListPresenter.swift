@@ -10,12 +10,12 @@ class MockAdListPresenter: AdListPresenterProtocol,  AdListInteractorOutputProto
     
     var calledViewDidLoad = false
     var calledGetAllAds = false
-    var calledFavoriteAdAction = false
+    var calledFavouriteAdAction = false
     var calledGoToDetailAd = false
     var calledShowAdLocationsOnMap = false
     var calledShowFetchedAds = false
-    var calledFavoriteAdSaved = false
-    var calledFavoriteAdRemoved = false
+    var calledFavouriteAdSaved = false
+    var calledFavouriteAdRemoved = false
     var showedAds: [Ad] = []
     
     
@@ -33,8 +33,8 @@ class MockAdListPresenter: AdListPresenterProtocol,  AdListInteractorOutputProto
         self.calledGetAllAds = true
     }
     
-    func favoriteAdAction(_ ad: Ad) {
-        self.calledFavoriteAdAction = true
+    func favouriteAdAction(_ ad: Ad) {
+        self.calledFavouriteAdAction = true
     }
     
     func goToDetailAd(with ad: Ad) {
@@ -50,12 +50,12 @@ class MockAdListPresenter: AdListPresenterProtocol,  AdListInteractorOutputProto
         self.showedAds = list
     }
     
-    func favoriteAdSaved(ad: FavouriteAd) {
-        self.calledFavoriteAdSaved = true
+    func favouriteAdSaved(ad: FavouriteAd) {
+        self.calledFavouriteAdSaved = true
     }
     
-    func favoriteAdRemoved(with propertyCode: String) {
-        self.calledFavoriteAdRemoved = true
+    func favouriteAdRemoved(with propertyCode: String) {
+        self.calledFavouriteAdRemoved = true
     }
 }
     

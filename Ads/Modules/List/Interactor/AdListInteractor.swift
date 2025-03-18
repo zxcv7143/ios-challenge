@@ -47,7 +47,7 @@ final class AdListInteractor: AdListInteractorInputProtocol {
                     adList = adList.map { ad in
                         var mutableAd = ad
                         mutableAd.isFavourite = localDataManager.isFavouriteAd(propertyCode: ad.propertyCode)
-                        mutableAd.dateSavedAsFavorite = localDataManager.fetchFavouriteAdSavingDate(by: ad.propertyCode)
+                        mutableAd.dateSavedAsFavourite = localDataManager.fetchFavouriteAdSavingDate(by: ad.propertyCode)
                         return mutableAd
                     }
                     presenter.showFetchedAds(list: adList)
@@ -81,12 +81,12 @@ extension AdListInteractor: AdListLocalDataManagerOutputProtocol {
     
     func favouriteAdSaved(ad: FavouriteAd) {
         guard let presenter else { return }
-        presenter.favoriteAdSaved(ad: ad)
+        presenter.favouriteAdSaved(ad: ad)
     }
     
     func favouriteAdRemoved(with propertyCode: String) {
         guard let presenter else { return }
-        presenter.favoriteAdRemoved(with: propertyCode)
+        presenter.favouriteAdRemoved(with: propertyCode)
     }
 }
 

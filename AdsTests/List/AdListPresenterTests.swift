@@ -60,7 +60,7 @@ struct AdListPresenterTests {
         presenter.interactor = interactor
         presenter.router = router
         let ad = mockAds.first!
-        presenter.favoriteAdAction(Ad(dto: ad))
+        presenter.favouriteAdAction(Ad(dto: ad))
         #expect(interactor.setFavouriteAdCalled)
     }
     

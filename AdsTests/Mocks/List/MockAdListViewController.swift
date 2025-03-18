@@ -24,7 +24,7 @@ class MockAdListViewController: AdListViewControllerProtocol {
         adList = list
     }
     
-    func setFavoriteAd(with index: Int, of ads: [Ad]) {
+    func setFavouriteAd(with index: Int, of ads: [Ad]) {
         setFavouriteAdCalled = false
     }
     

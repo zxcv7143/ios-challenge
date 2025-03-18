@@ -94,7 +94,7 @@
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
                                             <connections>
-                                                <action selector="favoriteAdAction:" destination="XXk-Us-EpJ" eventType="touchUpInside" id="F5G-Vb-RqY"/>
+                                                <action selector="favouriteAdAction:" destination="XXk-Us-EpJ" eventType="touchUpInside" id="F5G-Vb-RqY"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E65-MR-JUa">

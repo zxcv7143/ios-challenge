@@ -11,12 +11,12 @@ protocol AdListViewControllerProtocol: AnyObject {
     var presenter: AdListPresenterProtocol? { get set }
     func loadUI()
     func fetchedAds(list: [Ad])
-    func setFavoriteAd(with index: Int, of ads: [Ad])
+    func setFavouriteAd(with index: Int, of ads: [Ad])
 }
 
 protocol AdTableViewCellProtocol: AnyObject {
     func showAdLocationsOnMap()
-    func favoriteAdAction(_ ad: Ad)
+    func favouriteAdAction(_ ad: Ad)
 }
 
 class AdListViewController: UITableViewController {
@@ -93,12 +93,12 @@ extension AdListViewController: AdListViewControllerProtocol {
         }
     }
     
-    func setFavoriteAd(with index: Int, of ads: [Ad]) {
+    func setFavouriteAd(with index: Int, of ads: [Ad]) {
         self.ads = ads
         guard let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? AdListTableViewCell else {
             return
         }
-        cell.updateFavoriteView(ad: self.ads[index])
+        cell.updateFavouriteView(ad: self.ads[index])
     }
     
     func hideBackButtonNavBar() {
@@ -115,9 +115,9 @@ extension AdListViewController: AdTableViewCellProtocol {
         presenter.showAdLocationsOnMap(ads: self.ads)
     }
     
-    func favoriteAdAction(_ ad: Ad) {
+    func favouriteAdAction(_ ad: Ad) {
         guard let presenter else { return }
-        presenter.favoriteAdAction(ad)
+        presenter.favouriteAdAction(ad)
     }
 }
 

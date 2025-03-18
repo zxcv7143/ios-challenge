@@ -30,12 +30,12 @@ final class AdListTableViewCell: UITableViewCell {
         self.currentAd = homeAd
         self.setupLabelsContent()
         self.setPhotos()
-        self.configureFavoriteAdButton(ad: homeAd)
+        self.configureFavouriteAdButton(ad: homeAd)
     }
     
-    func updateFavoriteView(ad: Ad) {
+    func updateFavouriteView(ad: Ad) {
         self.currentAd = ad
-        self.configureFavoriteAdButton(ad: ad)
+        self.configureFavouriteAdButton(ad: ad)
     }
     
     // MARK: IBActions private functions
@@ -44,9 +44,9 @@ final class AdListTableViewCell: UITableViewCell {
         delegate.showAdLocationsOnMap()
     }
     
-    @IBAction private func favoriteAdAction(_ sender: Any) {
+    @IBAction private func favouriteAdAction(_ sender: Any) {
         guard let delegate, let currentAd else { return }
-        delegate.favoriteAdAction(currentAd)
+        delegate.favouriteAdAction(currentAd)
     }
     
     // MARK: Private functions
@@ -75,10 +75,10 @@ final class AdListTableViewCell: UITableViewCell {
         self.charactericLabel.setStyle(font: UIFont.systemFont(ofSize: 10), textColor: UIColor.black, text: "\(currentAd.size) m², \(currentAd.rooms) \("Rooms".localized), \(currentAd.bathrooms) \("Bathrooms".localized)")
     }
     
-    private func configureFavoriteAdButton(ad: Ad) {
+    private func configureFavouriteAdButton(ad: Ad) {
         if ad.isFavourite {
             self.favouriteAdButton.setImage(UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            self.savedInfoLabel.setStyle(font: UIFont.systemFont(ofSize: 10), textColor: UIColor.black, text: "\("AdSavedDate".localized) \(ad.dateSavedAsFavorite?.formattedDate() ?? "")")
+            self.savedInfoLabel.setStyle(font: UIFont.systemFont(ofSize: 10), textColor: UIColor.black, text: "\("AdSavedDate".localized) \(ad.dateSavedAsFavourite?.formattedDate() ?? "")")
             self.savedInfoLabel.isHidden = false
         } else {
             self.favouriteAdButton.setImage(UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate), for: .normal)

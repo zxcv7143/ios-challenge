@@ -11,14 +11,14 @@ import Foundation
 @MainActor
 protocol RemoveFavouriteAdProtocol: UseCase where Output == Bool {
     var adId: String { get }
-    var localDataManager: AdListLocalDataManager { get }
+    var localDataManager: AdListLocalDataManagerProtocol { get }
 }
 
 // MARK: - Execute extension
 @MainActor
 class RemoveFavouriteAdUseCase: RemoveFavouriteAdProtocol {
     
-    let localDataManager = AdListLocalDataManager()
+    let localDataManager: AdListLocalDataManagerProtocol = AdListLocalDataManager()
     let adId: String
     
     init(adId: String) {

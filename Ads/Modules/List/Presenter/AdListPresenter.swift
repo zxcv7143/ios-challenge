@@ -13,15 +13,15 @@ protocol AdListPresenterProtocol: AnyObject {
     
     @MainActor func viewDidLoad()
     @MainActor func getAllAds()
-    @MainActor func favoriteAdAction(_ ad: Ad)
+    @MainActor func favouriteAdAction(_ ad: Ad)
     @MainActor func goToDetailAd(with ad: Ad)
     @MainActor func showAdLocationsOnMap(ads: [Ad])
 }
 
 protocol AdListInteractorOutputProtocol: AnyObject {
     func showFetchedAds(list: [Ad])
-    func favoriteAdSaved(ad: FavouriteAd)
-    func favoriteAdRemoved(with propertyCode: String)
+    func favouriteAdSaved(ad: FavouriteAd)
+    func favouriteAdRemoved(with propertyCode: String)
     
 }
 
@@ -38,11 +38,11 @@ final class AdListPresenter  {
     private var adsList: [Ad] = []
     
     // Private functions
-    private func updateFavoriteAd(with propertyCode: String, isFavorite: Bool, date: Date?) {
+    private func updateFavouriteAd(with propertyCode: String, isFavourite: Bool, date: Date?) {
         guard let index = adsList.firstIndex(where: { $0.propertyCode == propertyCode }), let view else { return }
-        adsList[index].isFavourite = isFavorite
-        adsList[index].dateSavedAsFavorite = date
-        view.setFavoriteAd(with: index, of: adsList)
+        adsList[index].isFavourite = isFavourite
+        adsList[index].dateSavedAsFavourite = date
+        view.setFavouriteAd(with: index, of: adsList)
     }
 }
 
@@ -67,7 +67,7 @@ extension AdListPresenter: AdListPresenterProtocol {
     }
     
     @MainActor
-    func favoriteAdAction(_ ad: Ad) {
+    func favouriteAdAction(_ ad: Ad) {
         guard let interactor else { return }
         interactor.setFavouriteAd(ad)
     }
@@ -81,12 +81,12 @@ extension AdListPresenter: AdListPresenterProtocol {
 
 extension AdListPresenter: AdListInteractorOutputProtocol {
     
-    func favoriteAdSaved(ad: FavouriteAd) {
-        self.updateFavoriteAd(with: ad.propertyCode ?? "0", isFavorite: true, date: ad.savingDate)
+    func favouriteAdSaved(ad: FavouriteAd) {
+        self.updateFavouriteAd(with: ad.propertyCode ?? "0", isFavourite: true, date: ad.savingDate)
     }
 
-    func favoriteAdRemoved(with propertyCode: String) {
-        self.updateFavoriteAd(with: propertyCode, isFavorite: false, date: nil)
+    func favouriteAdRemoved(with propertyCode: String) {
+        self.updateFavouriteAd(with: propertyCode, isFavourite: false, date: nil)
     }
     
     func showFetchedAds(list: [Ad]) {
