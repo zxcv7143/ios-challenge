@@ -9,22 +9,20 @@ import Foundation
 
 // MARK: Use case protocol
 protocol GetDetailAdProtocol: UseCase where Output == AdDetail {
+    var repository: AdRepositoryProtocol { get }
 }
 
 // MARK: - Execute extension
 class GetDetailAdUseCase: GetDetailAdProtocol {
     
+    let repository: any AdRepositoryProtocol
+    
+    init(repository: any AdRepositoryProtocol = AdRepository()) {
+        self.repository = repository
+    }
+    
     func execute() async throws -> AdDetail {
-        guard let url = URL(string: Urls.AdDetail.adDetail) else {
-            throw NetworkError.invalidURL
-        }
-        let result = await NetworkClient().performRequest(url: url, responseType: AdDetailDTO.self)
-        switch result {
-        case .success(let adDTO):
-            return AdDetail(dto: adDTO)
-        case .failure:
-            throw NetworkError.invalidResponse
-        }
+        return try await self.repository.getAdDetails()
     }
 }
 
