@@ -27,6 +27,7 @@
 		380022942D831669007918D1 /* Ads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ads.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		380022AD2D83166D007918D1 /* AdsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		380022B72D83166D007918D1 /* AdsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		385CE9A82D89D73100D5EF43 /* Ads.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Ads.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -93,6 +94,7 @@
 		3800228B2D831669007918D1 = {
 			isa = PBXGroup;
 			children = (
+				385CE9A82D89D73100D5EF43 /* Ads.xctestplan */,
 				380027652D8348C1007918D1 /* App */,
 				380022962D831669007918D1 /* Ads */,
 				380022B02D83166D007918D1 /* AdsTests */,

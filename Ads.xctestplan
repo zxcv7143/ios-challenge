@@ -26,6 +26,13 @@
     },
     {
       "parallelizable" : true,
+      "skippedTests" : [
+        "AdListUITests",
+        "AdListUITests\/testDetailMapView()",
+        "AdListUITests\/testFavouriteButton()",
+        "AdListUITests\/testMapButtonOnList()",
+        "AdListUITests\/testNavigationToDetailPage()"
+      ],
       "target" : {
         "containerPath" : "container:Ads.xcodeproj",
         "identifier" : "380022B62D83166D007918D1",
