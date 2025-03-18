@@ -12,7 +12,7 @@ struct AdListInteractorTests {
     
     
     @Test("Test getting all ads") @MainActor func testGetAllAds() async  {
-        let interactor = AdListInteractor(httpClient: MockNetworkClient(response: mockAds))
+        let interactor = AdListInteractor(repository: MockAdRepository())
         let presenter = MockAdListPresenter()
         interactor.presenter = presenter
         interactor.localDataManager = MockAdListLocalDataManager()
@@ -23,7 +23,7 @@ struct AdListInteractorTests {
     
     @Test("Test removing favourite ad") @MainActor
     func testRemovingFavouriteAd() {
-        let interactor = AdListInteractor(httpClient: MockNetworkClient(response: mockAds))
+        let interactor = AdListInteractor(repository: MockAdRepository())
         let presenter = MockAdListPresenter()
         let localDataManager = MockAdListLocalDataManager()
         interactor.presenter = presenter
@@ -36,7 +36,7 @@ struct AdListInteractorTests {
     
     @Test("Test adding favourite ad") @MainActor
     func testAddingFavouriteAd() {
-        let interactor = AdListInteractor(httpClient: MockNetworkClient(response: mockAds))
+        let interactor = AdListInteractor()
         let presenter = MockAdListPresenter()
         let localDataManager = MockAdListLocalDataManager()
         interactor.presenter = presenter

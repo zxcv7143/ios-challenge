@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "91E7EEE5-F07A-4FA6-ABA7-B40CFF42953F",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Ads.xcodeproj",
+      "identifier" : "380022932D831669007918D1",
+      "name" : "Ads"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Ads.xcodeproj",
+        "identifier" : "380022AC2D83166D007918D1",
+        "name" : "AdsTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Ads.xcodeproj",
+        "identifier" : "380022B62D83166D007918D1",
+        "name" : "AdsUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

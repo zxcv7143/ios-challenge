@@ -26,34 +26,27 @@ final class AdListInteractor: AdListInteractorInputProtocol {
     weak var presenter: AdListInteractorOutputProtocol?
     var localDataManager: AdListLocalDataManagerProtocol?
     
-    private let httpClient: HTTPClientProtocol
+    private let repository: AdRepositoryProtocol
     
-    init(httpClient: HTTPClientProtocol = NetworkClient()) {
-        self.httpClient = httpClient
+    init(repository: AdRepositoryProtocol = AdRepository()) {
+        self.repository = repository
     }
     
     // Protocol functions
     @MainActor
     func getAllAds() async {
-        guard let url = URL(string: Urls.AdList.adList), let localDataManager else {
+        guard let localDataManager, let presenter, var adList = try? await repository.getAdList()  else {
             return
         }
-        let result = await httpClient.performRequest(url: url, responseType: [AdDTO].self)
-        
-        switch result {
-        case .success(let ads):
-            guard let presenter = self.presenter else { return }
-            var adList = ads.map { Ad(dto: $0) }
-            adList = adList.map { ad in
-                var mutableAd = ad
-                mutableAd.isFavourite = localDataManager.isFavouriteAd(propertyCode: ad.propertyCode)
-                mutableAd.dateSavedAsFavourite = localDataManager.fetchFavouriteAdSavingDate(by: ad.propertyCode)
-                return mutableAd
-            }
-            presenter.showFetchedAds(list: adList)
-        case .failure: break
+        adList = adList.map { ad in
+            var mutableAd = ad
+            mutableAd.isFavourite = localDataManager.isFavouriteAd(propertyCode: ad.propertyCode)
+            mutableAd.dateSavedAsFavourite = localDataManager.fetchFavouriteAdSavingDate(by: ad.propertyCode)
+            return mutableAd
         }
+        presenter.showFetchedAds(list: adList)
     }
+        
     @MainActor
     func setFavouriteAd(_ ad: Ad) {
         guard let localDataManager else { return }
