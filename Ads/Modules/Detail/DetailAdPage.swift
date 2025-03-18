@@ -50,7 +50,7 @@ struct DetailAdPage<ViewModel>: View where ViewModel: DetailAdPageViewModelProto
                     Button {
                         showMap.toggle()
                     } label: {
-                        Image(systemName: "map").foregroundColor(.black)
+                        Image(systemName: "map").foregroundColor(.main)
                     }.padding().accessibilityIdentifier("detailMapButton")
                     
                     VStack {

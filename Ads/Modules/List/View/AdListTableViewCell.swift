@@ -69,16 +69,16 @@ final class AdListTableViewCell: UITableViewCell {
     
     private func setupLabelsContent() {
         guard let currentAd else { return }
-        self.propertyTypeLabel.setStyle(font: UIFont.boldSystemFont(ofSize: 15), textColor: UIColor.black, text: "\(currentAd.propertyType.rawValue.localized) \("in".localized) \(currentAd.address)")
-        self.locationLabel.setStyle(font: UIFont.systemFont(ofSize: 15), textColor: UIColor.black, text: "\(currentAd.neighborhood), \(currentAd.district)")
-        self.priceLabel.setStyle(font: UIFont.boldSystemFont(ofSize: 20), textColor: UIColor.black, text: currentAd.fullPrice)
-        self.charactericLabel.setStyle(font: UIFont.systemFont(ofSize: 10), textColor: UIColor.black, text: "\(currentAd.size) m², \(currentAd.rooms) \("Rooms".localized), \(currentAd.bathrooms) \("Bathrooms".localized)")
+        self.propertyTypeLabel.setLabelStyle(font: UIFont.boldSystemFont(ofSize: 15), textColor: UIColor.main, text: "\(currentAd.propertyType.rawValue.localized) \("in".localized) \(currentAd.address)")
+        self.locationLabel.setLabelStyle(font: UIFont.systemFont(ofSize: 15), textColor: UIColor.main, text: "\(currentAd.neighborhood), \(currentAd.district)")
+        self.priceLabel.setLabelStyle(font: UIFont.boldSystemFont(ofSize: 20), textColor: UIColor.main, text: currentAd.fullPrice)
+        self.charactericLabel.setLabelStyle(font: UIFont.systemFont(ofSize: 10), textColor: UIColor.main, text: "\(currentAd.size) m², \(currentAd.rooms) \("Rooms".localized), \(currentAd.bathrooms) \("Bathrooms".localized)")
     }
     
     private func configureFavouriteAdButton(ad: Ad) {
         if ad.isFavourite {
             self.favouriteAdButton.setImage(UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
-            self.savedInfoLabel.setStyle(font: UIFont.systemFont(ofSize: 10), textColor: UIColor.black, text: "\("AdSavedDate".localized) \(ad.dateSavedAsFavourite?.formattedDate() ?? "")")
+            self.savedInfoLabel.setLabelStyle(font: UIFont.systemFont(ofSize: 10), textColor: UIColor.main, text: "\("AdSavedDate".localized) \(ad.dateSavedAsFavourite?.formattedDate() ?? "")")
             self.savedInfoLabel.isHidden = false
         } else {
             self.favouriteAdButton.setImage(UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate), for: .normal)
