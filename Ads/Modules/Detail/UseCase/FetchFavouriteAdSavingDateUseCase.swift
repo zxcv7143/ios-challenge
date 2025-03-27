@@ -7,14 +7,12 @@
 
 import Foundation
 // MARK: Use case protocol
-@MainActor
 protocol FetchFavouriteAdSavingDateProtocol: UseCase where Output == Date? {
     var adId: String { get }
     var localDataManager: AdListLocalDataManagerProtocol { get }
 }
 
 // MARK: - Execute extension
-@MainActor
 class FetchFavouriteAdSavingDateUseCase: FetchFavouriteAdSavingDateProtocol {
     
     let localDataManager: AdListLocalDataManagerProtocol = AdListLocalDataManager()

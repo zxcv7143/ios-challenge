@@ -8,14 +8,12 @@
 import Foundation
 
 // MARK: Use case protocol
-@MainActor
 protocol RemoveFavouriteAdProtocol: UseCase where Output == Bool {
     var adId: String { get }
     var localDataManager: AdListLocalDataManagerProtocol { get }
 }
 
 // MARK: - Execute extension
-@MainActor
 class RemoveFavouriteAdUseCase: RemoveFavouriteAdProtocol {
     
     let localDataManager: AdListLocalDataManagerProtocol = AdListLocalDataManager()
