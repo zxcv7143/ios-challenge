@@ -19,7 +19,6 @@ protocol AdListRouterProtocol: AnyObject {
 @MainActor
 final class AdListRouter: AdListRouterProtocol {
     
-    
     static func createAdListModule() -> UIViewController {
         // Initializing VIPER module variables
         guard let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "adListId") as? AdListViewController else { return AdListViewController() }

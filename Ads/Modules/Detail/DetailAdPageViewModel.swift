@@ -23,37 +23,38 @@ final class DetailAdPageViewModel: DetailAdPageViewModelProtocol {
     @Published var isFavourite: Bool = false
     
     var getAdDetailUseCase: any GetDetailAdProtocol = GetDetailAdUseCase()
-    var checkFavouriteAdUseCase: (any CheckFavouriteAdProtocol)?
-    var removeFavouriteAdUseCase: (any RemoveFavouriteAdProtocol)?
-    var saveFavouriteAdUseCase: (any SaveFavouriteAdProtocol)?
-    var fetchFavouriteSavingDateUseCase: (any FetchFavouriteAdSavingDateProtocol)?
+    var checkFavouriteAdUseCase: any CheckFavouriteAdProtocol = CheckFavouriteAdUseCase()
+    var removeFavouriteAdUseCase: any RemoveFavouriteAdProtocol = RemoveFavouriteAdUseCase()
+    var saveFavouriteAdUseCase: any SaveFavouriteAdProtocol = SaveFavouriteAdUseCase()
+    var fetchFavouriteSavingDateUseCase: any FetchFavouriteAdSavingDateProtocol = FetchFavouriteAdSavingDateUseCase()
     
     @MainActor
     func getDetailAd() {
         Task {
             self.adDetail = try await getAdDetailUseCase.execute()
-            self.checkFavouriteAdUseCase = CheckFavouriteAdUseCase(adId: String(adDetail?.adid ?? 0))
-            self.isFavourite = try await checkFavouriteAdUseCase?.execute() ?? false
-            self.fetchFavouriteSavingDateUseCase = FetchFavouriteAdSavingDateUseCase(adId: String(adDetail?.adid ?? 0))
-            self.adDetail?.dateSavedAsFavourite = try await fetchFavouriteSavingDateUseCase?.execute()
+            let adDetail = String(adDetail?.adid ?? 0)
+            checkFavouriteAdUseCase.adId = adDetail
+            self.isFavourite = try await checkFavouriteAdUseCase.execute()
+            fetchFavouriteSavingDateUseCase.adId = adDetail
+            self.adDetail?.dateSavedAsFavourite = try await fetchFavouriteSavingDateUseCase.execute()
         }
     }
     
     @MainActor
     func saveFavouriteAd() {
         Task {
-            self.saveFavouriteAdUseCase = SaveFavouriteAdUseCase(adId: String(adDetail?.adid ?? 0))
-            let result = try await saveFavouriteAdUseCase?.execute()
-            self.isFavourite = result?.0 ?? false
-            self.adDetail?.dateSavedAsFavourite = result?.1.savingDate
+            self.saveFavouriteAdUseCase.adId = String(adDetail?.adid ?? 0)
+            let result = try await saveFavouriteAdUseCase.execute()
+            self.isFavourite = result.0
+            self.adDetail?.dateSavedAsFavourite = result.1.savingDate
         }
     }
     
     @MainActor
     func removeFavouriteAd() {
         Task {
-            self.removeFavouriteAdUseCase = RemoveFavouriteAdUseCase(adId: String(adDetail?.adid ?? 0))
-            guard let removed = try await removeFavouriteAdUseCase?.execute() else { return }
+            self.removeFavouriteAdUseCase.adId = String(adDetail?.adid ?? 0)
+            let removed = try await removeFavouriteAdUseCase.execute()
             self.isFavourite = removed ? false : true
         }
     }

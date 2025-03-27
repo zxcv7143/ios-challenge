@@ -6,7 +6,6 @@
 //
 import CoreData
 // MARK: - Protocol
-@MainActor
 protocol AdListLocalDataManagerProtocol: AnyObject {
     func isFavouriteAd(propertyCode: String) -> Bool
     func saveFavouriteAd(propertyCode: String, completion: (Bool, FavouriteAd?) -> (Void))
@@ -16,7 +15,6 @@ protocol AdListLocalDataManagerProtocol: AnyObject {
 
 
 // MARK: - Class
-@MainActor
 final class AdListLocalDataManager: AdListLocalDataManagerProtocol {
     
     func isFavouriteAd(propertyCode: String) -> Bool {

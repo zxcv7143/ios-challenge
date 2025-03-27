@@ -8,7 +8,7 @@ import Foundation
 
 // MARK: Use case protocol
 protocol CheckFavouriteAdProtocol: UseCase where Output == Bool {
-    var adId: String { get }
+    var adId: String { get set }
     var localDataManager: AdListLocalDataManagerProtocol { get }
 }
 
@@ -16,11 +16,7 @@ protocol CheckFavouriteAdProtocol: UseCase where Output == Bool {
 class CheckFavouriteAdUseCase: CheckFavouriteAdProtocol {
     
     let localDataManager: AdListLocalDataManagerProtocol = AdListLocalDataManager()
-    let adId: String
-    
-    init(adId: String) {
-        self.adId = adId
-    }
+    var adId: String = "0"
     
     func execute() async -> Bool {
         return localDataManager.isFavouriteAd(propertyCode: adId)

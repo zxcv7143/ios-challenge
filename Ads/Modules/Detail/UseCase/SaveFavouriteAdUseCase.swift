@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: Use case protocol
 protocol SaveFavouriteAdProtocol: UseCase where Output == (Bool, FavouriteAd) {
-    var adId: String { get }
+    var adId: String { get set }
     var localDataManager: AdListLocalDataManagerProtocol { get }
 }
 
@@ -17,11 +17,7 @@ protocol SaveFavouriteAdProtocol: UseCase where Output == (Bool, FavouriteAd) {
 class SaveFavouriteAdUseCase: SaveFavouriteAdProtocol {
     
     let localDataManager: AdListLocalDataManagerProtocol = AdListLocalDataManager()
-    let adId: String
-    
-    init(adId: String) {
-        self.adId = adId
-    }
+    var adId: String = ""
     
     func execute() async throws -> (Bool, FavouriteAd) {
         try await withCheckedThrowingContinuation { continuation in

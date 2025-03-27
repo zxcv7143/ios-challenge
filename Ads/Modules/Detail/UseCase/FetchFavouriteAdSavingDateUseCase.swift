@@ -8,7 +8,7 @@
 import Foundation
 // MARK: Use case protocol
 protocol FetchFavouriteAdSavingDateProtocol: UseCase where Output == Date? {
-    var adId: String { get }
+    var adId: String { get set}
     var localDataManager: AdListLocalDataManagerProtocol { get }
 }
 
@@ -16,11 +16,7 @@ protocol FetchFavouriteAdSavingDateProtocol: UseCase where Output == Date? {
 class FetchFavouriteAdSavingDateUseCase: FetchFavouriteAdSavingDateProtocol {
     
     let localDataManager: AdListLocalDataManagerProtocol = AdListLocalDataManager()
-    let adId: String
-    
-    init(adId: String) {
-        self.adId = adId
-    }
+    var adId: String = ""
     
     func execute() async -> Date? {
         return localDataManager.fetchFavouriteAdSavingDate(by: adId)

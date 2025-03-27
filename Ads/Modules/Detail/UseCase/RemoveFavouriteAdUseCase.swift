@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: Use case protocol
 protocol RemoveFavouriteAdProtocol: UseCase where Output == Bool {
-    var adId: String { get }
+    var adId: String { get set }
     var localDataManager: AdListLocalDataManagerProtocol { get }
 }
 
@@ -17,11 +17,7 @@ protocol RemoveFavouriteAdProtocol: UseCase where Output == Bool {
 class RemoveFavouriteAdUseCase: RemoveFavouriteAdProtocol {
     
     let localDataManager: AdListLocalDataManagerProtocol = AdListLocalDataManager()
-    let adId: String
-    
-    init(adId: String) {
-        self.adId = adId
-    }
+    var adId: String = "0"
     
     func execute() async throws -> Bool {
         try await withCheckedThrowingContinuation { continuation in

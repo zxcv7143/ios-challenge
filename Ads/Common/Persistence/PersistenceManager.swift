@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 import UIKit
 
-@MainActor
 final class PersistenceManager {
     // MARK: - Singleton
     static let shared = PersistenceManager()
