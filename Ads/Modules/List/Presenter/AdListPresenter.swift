@@ -15,8 +15,7 @@ protocol AdListPresenterProtocol: AnyObject {
     @MainActor func getAllAds() async
     @MainActor func goToDetailAd(with ad: Ad)
     @MainActor func showAdLocationsOnMap(ads: [Ad])
-    
-    func favouriteAdAction(_ ad: Ad) async
+    @MainActor func favouriteAdAction(_ ad: Ad)
 }
 
 protocol AdListInteractorOutputProtocol: AnyObject {
@@ -65,8 +64,8 @@ extension AdListPresenter: AdListPresenterProtocol {
     }
     
 
-    func favouriteAdAction(_ ad: Ad) async {
-        await interactor?.setFavouriteAd(ad)
+    @MainActor func favouriteAdAction(_ ad: Ad) {
+        interactor?.setFavouriteAd(ad)
     }
     
     @MainActor func showAdLocationsOnMap(ads: [Ad]) {
