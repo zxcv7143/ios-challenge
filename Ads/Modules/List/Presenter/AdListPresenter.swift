@@ -13,9 +13,10 @@ protocol AdListPresenterProtocol: AnyObject {
     
     @MainActor func viewDidLoad() async
     @MainActor func getAllAds() async
-    @MainActor func favouriteAdAction(_ ad: Ad)
     @MainActor func goToDetailAd(with ad: Ad)
     @MainActor func showAdLocationsOnMap(ads: [Ad])
+    
+    func favouriteAdAction(_ ad: Ad) async
 }
 
 protocol AdListInteractorOutputProtocol: AnyObject {
@@ -39,42 +40,38 @@ final class AdListPresenter  {
     
     // Private functions
     private func updateFavouriteAd(with propertyCode: String, isFavourite: Bool, date: Date?) {
-        guard let index = adsList.firstIndex(where: { $0.propertyCode == propertyCode }), let view else { return }
+        guard let index = adsList.firstIndex(where: { $0.propertyCode == propertyCode }) else { return }
         adsList[index].isFavourite = isFavourite
         adsList[index].dateSavedAsFavourite = date
-        view.setFavouriteAd(with: index, of: adsList)
+        view?.setFavouriteAd(with: index, of: adsList)
     }
 }
 
 extension AdListPresenter: AdListPresenterProtocol {
     func goToDetailAd(with ad: Ad) {
-        guard let router else { return }
-        router.goToDetailAd(currentViewController: view, ad: ad)
+        router?.goToDetailAd(currentViewController: view, ad: ad)
     }
     
     
     @MainActor
     func viewDidLoad() async {
-        guard let view = self.view else { return }
-        view.loadUI()
+        view?.loadUI()
         await self.getAllAds()
     }
     
-    @MainActor
+    
     func getAllAds() async {
-        guard let interactor = self.interactor else { return }
-        await interactor.getAllAds()
+        await interactor?.getAllAds()
     }
     
-    @MainActor
-    func favouriteAdAction(_ ad: Ad) {
-        guard let interactor else { return }
-        interactor.setFavouriteAd(ad)
+
+    func favouriteAdAction(_ ad: Ad) async {
+        await interactor?.setFavouriteAd(ad)
     }
     
     @MainActor func showAdLocationsOnMap(ads: [Ad]) {
-        guard let view, let router else { return }
-        router.goToMapView(currentViewController: view, ad: ads)
+        guard let view else { return }
+        router?.goToMapView(currentViewController: view, ad: ads)
     }
 }
 
@@ -90,9 +87,8 @@ extension AdListPresenter: AdListInteractorOutputProtocol {
     }
     
     func showFetchedAds(list: [Ad]) {
-        guard let view else { return }
         self.adsList = list
-        view.fetchedAds(list: list)
+        view?.fetchedAds(list: list)
     }
 
 }

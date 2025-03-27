@@ -10,8 +10,8 @@ import Foundation
 protocol AdListInteractorInputProtocol {
     var localDataManager: AdListLocalDataManagerProtocol? { get set }
     var presenter: AdListInteractorOutputProtocol? { get set }
-    @MainActor func getAllAds() async
-    @MainActor func setFavouriteAd(_ ad: Ad)
+    func getAllAds() async
+    func setFavouriteAd(_ ad: Ad)
 }
 
 protocol AdListLocalDataManagerOutputProtocol: AnyObject {
@@ -33,7 +33,6 @@ final class AdListInteractor: AdListInteractorInputProtocol {
     }
     
     // Protocol functions
-    @MainActor
     func getAllAds() async {
         guard let localDataManager, let presenter, var adList = try? await repository.getAdList()  else {
             return
@@ -47,8 +46,7 @@ final class AdListInteractor: AdListInteractorInputProtocol {
         presenter.showFetchedAds(list: adList)
     }
         
-    @MainActor
-    func setFavouriteAd(_ ad: Ad) {
+    func setFavouriteAd(_ ad: Ad)  {
         guard let localDataManager else { return }
         if ad.isFavourite {
             localDataManager.removeFavouriteAd(propertyCode: ad.propertyCode) { [weak self] removed in
@@ -72,13 +70,11 @@ final class AdListInteractor: AdListInteractorInputProtocol {
 extension AdListInteractor: AdListLocalDataManagerOutputProtocol {
     
     func favouriteAdSaved(ad: FavouriteAd) {
-        guard let presenter else { return }
-        presenter.favouriteAdSaved(ad: ad)
+        presenter?.favouriteAdSaved(ad: ad)
     }
     
     func favouriteAdRemoved(with propertyCode: String) {
-        guard let presenter else { return }
-        presenter.favouriteAdRemoved(with: propertyCode)
+        presenter?.favouriteAdRemoved(with: propertyCode)
     }
 }
 

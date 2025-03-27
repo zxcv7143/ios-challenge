@@ -40,13 +40,14 @@ final class AdListTableViewCell: UITableViewCell {
     
     // MARK: IBActions private functions
     @IBAction private func seeOnMapAction(_ sender: Any) {
-        guard let delegate = self.delegate else { return }
-        delegate.showAdLocationsOnMap()
+        delegate?.showAdLocationsOnMap()
     }
     
     @IBAction private func favouriteAdAction(_ sender: Any) {
-        guard let delegate, let currentAd else { return }
-        delegate.favouriteAdAction(currentAd)
+        guard let currentAd else { return }
+        Task {
+            await delegate?.favouriteAdAction(currentAd)
+        }
     }
     
     // MARK: Private functions

@@ -16,7 +16,7 @@ protocol AdListViewControllerProtocol: AnyObject {
 
 protocol AdTableViewCellProtocol: AnyObject {
     func showAdLocationsOnMap()
-    func favouriteAdAction(_ ad: Ad)
+    func favouriteAdAction(_ ad: Ad) async
 }
 
 class AdListViewController: UITableViewController {
@@ -27,9 +27,14 @@ class AdListViewController: UITableViewController {
 
     override func viewDidLoad()  {
         super.viewDidLoad()
-        guard let presenter else { return }
         Task {
-            await presenter.viewDidLoad()
+            await presenter?.viewDidLoad()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Task {
+            await presenter?.viewDidLoad()
         }
     }
     
@@ -51,9 +56,8 @@ class AdListViewController: UITableViewController {
     }
     
     @objc func refreshData() {
-        guard let presenter = self.presenter else { return }
         Task {
-            await presenter.getAllAds()
+            await presenter?.getAllAds()
         }
     }
     
@@ -74,8 +78,7 @@ class AdListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let presenter else { return }
-        presenter.goToDetailAd(with: self.ads[indexPath.row])
+        presenter?.goToDetailAd(with: self.ads[indexPath.row])
     }
 }
 
@@ -115,13 +118,11 @@ extension AdListViewController: AdListViewControllerProtocol {
 extension AdListViewController: AdTableViewCellProtocol {
     
     func showAdLocationsOnMap() {
-        guard let presenter else { return }
-        presenter.showAdLocationsOnMap(ads: self.ads)
+        presenter?.showAdLocationsOnMap(ads: self.ads)
     }
     
-    func favouriteAdAction(_ ad: Ad) {
-        guard let presenter else { return }
-        presenter.favouriteAdAction(ad)
+    func favouriteAdAction(_ ad: Ad) async {
+        await presenter?.favouriteAdAction(ad)
     }
 }
 
