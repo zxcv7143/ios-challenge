@@ -8,9 +8,7 @@
 
 import Foundation
 import CoreData
-import UIKit
 
-@MainActor
 final class PersistenceManager {
     // MARK: - Singleton
     static let shared = PersistenceManager()
@@ -28,6 +26,7 @@ final class PersistenceManager {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
+        
         let container = NSPersistentContainer(name: "AdList")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {

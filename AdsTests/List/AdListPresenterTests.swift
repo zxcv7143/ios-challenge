@@ -51,7 +51,7 @@ struct AdListPresenterTests {
     }
     
     @Test("Test going to detatil ad page") @MainActor
-    func testFavouriteAdAction() {
+    func testFavouriteAdAction() async {
         let presenter = AdListPresenter()
         let interactor = MockAdListInteractor()
         let viewController = MockAdListViewController()
@@ -60,7 +60,7 @@ struct AdListPresenterTests {
         presenter.interactor = interactor
         presenter.router = router
         let ad = mockAds.first!
-        presenter.favouriteAdAction(Ad(dto: ad))
+        await presenter.favouriteAdAction(Ad(dto: ad))
         #expect(interactor.setFavouriteAdCalled)
     }
     
